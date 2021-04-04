@@ -1,0 +1,35 @@
+#dish-table{
+    margin: 0 auto 2rem auto;
+    width: 70vw;
+}
+
+.table-name{
+    margin:0 auto 1em auto;
+    padding: 1em;
+    width: 10vw;
+    display: block;
+    text-align: center;
+    background-color: whitesmoke;
+    border-radius: 30px;
+    border: black;
+}
+
+.info-message
+{
+    margin:0 auto 1em auto;
+    padding: 1em;
+    width: 30vw;
+    display: block;
+    text-align: center;
+    background-color: rgb(229, 215, 215);
+    border-radius: 30px;
+    border: black;
+}
+
+.stripe
+{
+    width:80%;
+    background-color: rgb(70, 70, 70);
+    height: 0.2em;
+    margin:0 auto 1em auto;
+}
