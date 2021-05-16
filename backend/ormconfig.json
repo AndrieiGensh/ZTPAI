@@ -1,0 +1,17 @@
+{
+  "type": "postgres",
+  "host": "ec2-54-216-185-51.eu-west-1.compute.amazonaws.com",
+  "port": 5432,
+  "username": "hlieipcqtlvloq",
+  "password": "ae64d720ed192d413f5e8fd1105f5cf6e2971c1ad39a17546e06b4c90dd42717",
+  "database": "d35sodv9h59mq9",
+  "entities": ["dist/**/*.entity{.ts,.js}"],
+  "synchronize": true,
+  "autoLoadEntities": true,
+  "extra": {
+    "ssl": {
+      "rejectUnauthorized": false
+    }
+  },
+  "url": "postgres://hlieipcqtlvloq:ae64d720ed192d413f5e8fd1105f5cf6e2971c1ad39a17546e06b4c90dd42717@ec2-54-216-185-51.eu-west-1.compute.amazonaws.com:5432/d35sodv9h59mq9"
+}
