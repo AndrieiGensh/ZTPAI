@@ -25,7 +25,7 @@ let UserInfoService = class UserInfoService {
         return this.userinfoRepo.save(userinfo);
     }
     findAll() {
-        return this.userinfoRepo.find();
+        return this.userinfoRepo.find({ relations: ["namesurname", "sex", "lifestyle"] });
     }
 };
 UserInfoService = __decorate([

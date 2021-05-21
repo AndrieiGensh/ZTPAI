@@ -5,5 +5,5 @@ export declare class UserInfoService {
     private userinfoRepo;
     constructor(userinfoRepo: Repository<UserInfoEntity>);
     create(userinfo: UserInfoDto): Promise<UserInfoDto>;
-    findAll(): Promise<UserInfoDto[]>;
+    findAll(): Promise<UserInfoEntity[]>;
 }

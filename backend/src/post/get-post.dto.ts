@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { IsDate, IsNumber, IsString } from 'class-validator';
-import { UsertDto } from 'src/users/user.dto';
+import { UserDto } from 'src/users/user.dto';
 
 export class GetPostDto{
     @IsNumber()
@@ -18,5 +18,5 @@ export class GetPostDto{
     @IsNumber()
     dislikes: number;
 
-    user: UsertDto;
+    user: UserDto;
 }

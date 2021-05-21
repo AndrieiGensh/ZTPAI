@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Body, Controller, Get, Post } from '@nestjs/common';
+import { UserInfoEntity } from '../models/user-info.entity';
 import { UserInfoService } from '../services/user-info.service';
 import { UserInfoDto } from '../user-info.dto';
 
@@ -10,7 +11,7 @@ export class UserInfoController {
     }
 
     @Get()
-    async findAll() : Promise<UserInfoDto[]>
+    async findAll() : Promise<UserInfoEntity[]>
     {
         return this.userinfoService.findAll();
     }

@@ -17,8 +17,8 @@ export class UserInfoService {
         return this.userinfoRepo.save(userinfo);
     }
 
-    findAll() : Promise<UserInfoDto[]>
+    findAll() : Promise<UserInfoEntity[]>
     {
-        return this.userinfoRepo.find();
+        return this.userinfoRepo.find({relations: ["namesurname", "sex", "lifestyle"]});
     }
 }

@@ -2881,11 +2881,6 @@
         "signature": "ffb6c537b33e4c1629d96912010f476d95497b47123a49a31922533e9a1b8e61",
         "affectsGlobalScope": false
       },
-      "../src/users/controllers/users.controller.ts": {
-        "version": "74acc1ec1681785a8290d87f5ed943996c75f0d7550f1dfc0784343cacfa9c57",
-        "signature": "68b1674efd9a07feb7e7ef0cc770778f05bcc09a86c7a8bd4d6faa72804fe229",
-        "affectsGlobalScope": false
-      },
       "../src/settings/models/settings.entity.ts": {
         "version": "28a9176489ef5688dca788d70a07d644a1b2160ca02f9e54cde6e3129cf0e3e7",
         "signature": "bb77ac8cc803b1714a1afbf95417fb2779b8c269e2e20c7c6edd0e7c5a026ef9",
@@ -2977,18 +2972,8 @@
         "affectsGlobalScope": false
       },
       "../src/users/models/users.entity.ts": {
-        "version": "552cf429a7a4d89d131f9ecb150a74ed02aa3e5d71d070bd73e831b589a25683",
+        "version": "76b981d5ad93cbec21dfa2d95dacd740de754eb6d539fd8de9486a87dd02e34b",
         "signature": "6f0aa4886717577c31c0d964dd4c6737ea2e274c59ad1856694ae9da3b8fbbb5",
-        "affectsGlobalScope": false
-      },
-      "../src/users/services/users.service.ts": {
-        "version": "9fa2834dce9e991963565a887b080afe053a0b8eb0bd14c5dafd8a9c87b44155",
-        "signature": "b2ae3c452f293748d9531a6d403958bddf2c5b7fec55ee82c6598cbd27afe9c7",
-        "affectsGlobalScope": false
-      },
-      "../src/users/users.module.ts": {
-        "version": "3a23f5cba8f02c51e12edcf67e75393a371990ed7313b41e8962962d42eacffe",
-        "signature": "12dec6c99bd8d11167fa91a31e737abbbf8c9cc789c151a25a9a1d13f328175c",
         "affectsGlobalScope": false
       },
       "../node_modules/class-validator/types/validation/validationerror.d.ts": {
@@ -3636,14 +3621,34 @@
         "signature": "a2643bc2642dd799056ffab8a790a3c7eeb9d919932c24c755918294bd8972ba",
         "affectsGlobalScope": false
       },
+      "../src/users/user.dto.ts": {
+        "version": "603e818a125021b32b9413eee901338d8e0f6e1db59e3f822f3a5889da750a37",
+        "signature": "4cb1976e36d65a8b3fc1099d2134a26625eaf4661f6118b36abc392ce4be742f",
+        "affectsGlobalScope": false
+      },
+      "../src/users/services/users.service.ts": {
+        "version": "6afe510b55ff20677386a8455c782911c572643bd2cfa439afb21d64796c2af2",
+        "signature": "b4679d080c1cbf1de1ee1b4ed9cebb8d6656bd5bd4ada9c2b1cf10e17182bada",
+        "affectsGlobalScope": false
+      },
+      "../src/users/controllers/users.controller.ts": {
+        "version": "a4e655b42b3160fd6a5e9fe3933376d4a03191c1dbdb1bdc83fa6f7a12fa39bc",
+        "signature": "616ba21eec35c001ffd160e39bf7c1f8678951ee1eb9ad3f1de5da4f484e652e",
+        "affectsGlobalScope": false
+      },
+      "../src/users/users.module.ts": {
+        "version": "3a23f5cba8f02c51e12edcf67e75393a371990ed7313b41e8962962d42eacffe",
+        "signature": "12dec6c99bd8d11167fa91a31e737abbbf8c9cc789c151a25a9a1d13f328175c",
+        "affectsGlobalScope": false
+      },
       "../src/user-info/services/user-info.service.ts": {
-        "version": "9ad082015d5d052f20c6740cac771c353dab87b44283f4d3575dbeb0adeb199e",
-        "signature": "56061f66be2276bd4fe91364d26e534dd8b5d280b0261346504e1c09f4047498",
+        "version": "59ca815bfc9437cef5c2455b1f87d54fa70577c471790b5c5dafaac26039dc39",
+        "signature": "dab07fdeab81d2d49e4f269bacb447cde15e1fc93be9c3835c2b2eedcf4126ea",
         "affectsGlobalScope": false
       },
       "../src/user-info/controllers/user-info.controller.ts": {
-        "version": "d904a6547d5679cdedeace4b51d0a5c048f908930ddae7480491daba1418af90",
-        "signature": "e7c5c4264acaa2a07dc9ed786b7cb3343a69e17bc515f9959fa0bf611cb2f985",
+        "version": "6dfe15b9759f76d491462fda8fe5e94a1012a219e0e8ee74e9ff2b5717ef73cc",
+        "signature": "5a0370a47e2f84154b535eaf2cd0802e061890014f388afe3accf00777d72160",
         "affectsGlobalScope": false
       },
       "../src/user-info/user-info.module.ts": {
@@ -3711,19 +3716,14 @@
         "signature": "7bf140e14c249fc75b6f06bc529859eb6a7efd33ba119f08154389ac38e45997",
         "affectsGlobalScope": false
       },
-      "../src/users/user.dto.ts": {
-        "version": "12a31316dd2f032ff700e0079e5354ba62d92e38fd9283a24512a687c9444b6e",
-        "signature": "2297e62b802609aaec51c6cfd24ee92ab00aba06526568ca68bdcd79c4348a5c",
-        "affectsGlobalScope": false
-      },
       "../src/post/get-post.dto.ts": {
-        "version": "1066ee1e21502cb87758482e0e327b4c8c66ba6a1f004278b9a74106f111d19e",
-        "signature": "735eee66099e1281a84d1f005d89681eb76fc968e597c775934705ae0cfdd1d4",
+        "version": "998a0cf2cdb91d6a3fbe563b64d4cd900eaec809772cf7449bf9c29936ed391f",
+        "signature": "2781bef1676528134e757a860258c341a58407d2f943e8318938adaa3f723da8",
         "affectsGlobalScope": false
       },
       "../src/comment/comment.dto.ts": {
-        "version": "bf76e58aefc0a1d22ba943f2bf114fee0ca0427c712ae3f3a050b21cce443a02",
-        "signature": "28357eb42e9568535ea6176f2d759cceda14d0b122ca2c875a1db5df350ab5dc",
+        "version": "4253d5e45a7b55cdb21a192d85ec730ac44c3f6aac28b51b715d8bd31d33dad2",
+        "signature": "a30281b75d271ab9dec3bc6baf715ce2914324cdc960047ab42e8ff8c060bd24",
         "affectsGlobalScope": false
       },
       "../src/comment/services/comment.service.ts": {
@@ -4132,8 +4132,8 @@
         "affectsGlobalScope": false
       },
       "../src/user-daily-meals/user-daily-meals.dto.ts": {
-        "version": "533ad9c035f07d760cd0bf11cc9c5bfbed4dc6316e529f38acdf61bd01964b4f",
-        "signature": "53ac242db5164666d2da092d19f5d89e89c95030694b80c2202b3bdff89428ce",
+        "version": "d9267f3ac6ee5479a63a965a6d9214a743da2f6899e984bbc0ee91f840fa9ef6",
+        "signature": "130f31a64ac2e2e7692ca0d642f776d9cb3fc862f2b009dbed9679c3c5f2f6ca",
         "affectsGlobalScope": false
       },
       "../node_modules/@babel/types/lib/index.d.ts": {
@@ -8006,6 +8006,7 @@
       ],
       "../src/user-info/controllers/user-info.controller.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
+        "../src/user-info/models/user-info.entity.ts",
         "../src/user-info/services/user-info.service.ts",
         "../src/user-info/user-info.dto.ts"
       ],
@@ -8037,7 +8038,10 @@
         "../src/user-info/services/user-info.service.ts"
       ],
       "../src/users/controllers/users.controller.ts": [
-        "../node_modules/@nestjs/common/index.d.ts"
+        "../node_modules/@nestjs/common/index.d.ts",
+        "../src/users/models/users.entity.ts",
+        "../src/users/services/users.service.ts",
+        "../src/users/user.dto.ts"
       ],
       "../src/users/models/users.entity.ts": [
         "../node_modules/typeorm/index.d.ts",
@@ -8050,7 +8054,11 @@
         "../src/user-info/models/user-info.entity.ts"
       ],
       "../src/users/services/users.service.ts": [
-        "../node_modules/@nestjs/common/index.d.ts"
+        "../node_modules/@nestjs/common/index.d.ts",
+        "../node_modules/@nestjs/typeorm/index.d.ts",
+        "../node_modules/typeorm/index.d.ts",
+        "../src/users/models/users.entity.ts",
+        "../src/users/user.dto.ts"
       ],
       "../src/users/user.dto.ts": [
         "../node_modules/class-validator/types/index.d.ts",
@@ -11206,6 +11214,7 @@
         "../src/users/user.dto.ts"
       ],
       "../src/user-info/controllers/user-info.controller.ts": [
+        "../src/user-info/models/user-info.entity.ts",
         "../src/user-info/services/user-info.service.ts",
         "../src/user-info/user-info.dto.ts"
       ],
@@ -11225,6 +11234,11 @@
         "../src/name-surname/name-surname.dto.ts",
         "../src/sex/sex.dto.ts"
       ],
+      "../src/users/controllers/users.controller.ts": [
+        "../src/users/models/users.entity.ts",
+        "../src/users/services/users.service.ts",
+        "../src/users/user.dto.ts"
+      ],
       "../src/users/models/users.entity.ts": [
         "../src/comment/models/comment.entity.ts",
         "../src/diets/models/diets.entity.ts",
@@ -11233,6 +11247,11 @@
         "../src/statistics/models/statistics.entity.ts",
         "../src/user-daily-meals/models/user-daily-meals.entity.ts",
         "../src/user-info/models/user-info.entity.ts"
+      ],
+      "../src/users/services/users.service.ts": [
+        "../node_modules/typeorm/index.d.ts",
+        "../src/users/models/users.entity.ts",
+        "../src/users/user.dto.ts"
       ],
       "../src/users/user.dto.ts": [
         "../src/user-info/user-info.dto.ts"

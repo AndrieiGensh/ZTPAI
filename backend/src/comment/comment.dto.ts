@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { IsNumber, IsString, IsDate } from 'class-validator';
 import { GetPostDto } from 'src/post/get-post.dto';
-import { UsertDto } from 'src/users/user.dto';
+import { UserDto } from 'src/users/user.dto';
 
 export class CommentDto{
     @IsNumber()
@@ -19,7 +19,7 @@ export class CommentDto{
     @IsNumber()
     dislikes: number;
 
-    user: UsertDto;
+    user: UserDto;
 
     post: GetPostDto;
 }

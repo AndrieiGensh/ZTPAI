@@ -2,7 +2,7 @@
 import { IsNumber, IsString, IsEmail } from 'class-validator';
 import { UserInfoDto } from 'src/user-info/user-info.dto';
 
-export class UsertDto{
+export class UserDto{
     @IsNumber()
     id: number;
 
@@ -13,5 +13,4 @@ export class UsertDto{
     password: string;
 
     userInfo: UserInfoDto;
-
 }
