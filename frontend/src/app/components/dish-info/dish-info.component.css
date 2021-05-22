@@ -1,15 +1,11 @@
 
 @import url(https://fonts.googleapis.com/css?family=Ubuntu:400,700);
-* {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;  
-}
+
 
 .first-row
 {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   width: 80%;
   justify-content: center;
   align-items: center;
