@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable @typescript-eslint/ban-types */
 import { Get } from '@nestjs/common';
 import { Post } from '@nestjs/common';
 import { Body } from '@nestjs/common';
@@ -23,5 +24,12 @@ export class UsersController {
     create(@Body() userinfo : UserDto) : Promise<UserDto>
     {
         return this.userService.create(userinfo);
+    }
+
+    @Post('login')
+    async login(@Body() user: UserDto) : Promise<Object>
+    {
+        const jwt = await this.userService.login(user);
+        return { acces_token: jwt};
     }
 }

@@ -19,6 +19,9 @@ const statistics_entity_1 = require("../../statistics/models/statistics.entity")
 const user_info_entity_1 = require("../../user-info/models/user-info.entity");
 const user_daily_meals_entity_1 = require("../../user-daily-meals/models/user-daily-meals.entity");
 let UserEntity = class UserEntity {
+    emailToLower() {
+        this.email = this.email.toLowerCase();
+    }
 };
 __decorate([
     typeorm_1.PrimaryGeneratedColumn(),
@@ -62,6 +65,12 @@ __decorate([
     typeorm_1.OneToMany(() => user_daily_meals_entity_1.UserDailyMealsEntity, (userDailyMeals) => userDailyMeals.user),
     __metadata("design:type", Array)
 ], UserEntity.prototype, "userDailyMeals", void 0);
+__decorate([
+    typeorm_1.BeforeInsert(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], UserEntity.prototype, "emailToLower", null);
 UserEntity = __decorate([
     typeorm_1.Entity()
 ], UserEntity);

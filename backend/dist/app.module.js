@@ -31,6 +31,7 @@ const statistics_module_1 = require("./statistics/statistics.module");
 const user_daily_meals_module_1 = require("./user-daily-meals/user-daily-meals.module");
 const diet_products_module_1 = require("./diet-products/diet-products.module");
 const typeorm_2 = require("typeorm");
+const auth_module_1 = require("./auth/auth.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -61,6 +62,7 @@ AppModule = __decorate([
             statistics_module_1.StatisticsModule,
             user_daily_meals_module_1.UserDailyMealsModule,
             diet_products_module_1.DietProductsModule,
+            auth_module_1.AuthModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

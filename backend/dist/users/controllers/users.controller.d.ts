@@ -6,4 +6,5 @@ export declare class UsersController {
     constructor(userService: UsersService);
     findAll(): Promise<UserEntity[]>;
     create(userinfo: UserDto): Promise<UserDto>;
+    login(user: UserDto): Promise<Object>;
 }

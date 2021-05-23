@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -23,6 +24,7 @@ import { StatisticsModule } from './statistics/statistics.module';
 import { UserDailyMealsModule } from './user-daily-meals/user-daily-meals.module';
 import { DietProductsModule } from './diet-products/diet-products.module';
 import { getConnectionOptions } from 'typeorm';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -52,6 +54,7 @@ import { getConnectionOptions } from 'typeorm';
     StatisticsModule,
     UserDailyMealsModule,
     DietProductsModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

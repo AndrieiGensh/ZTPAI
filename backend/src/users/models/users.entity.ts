@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, OneToMany, ManyToOne} from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, OneToMany, ManyToOne, BeforeInsert} from 'typeorm';
 import { SettingsEntity } from '../../settings/models/settings.entity'; 
 import { DietsEntity } from '../../diets/models/diets.entity';
 import { PostEntity } from 'src/post/models/post.entity';
@@ -41,4 +41,11 @@ export class UserEntity {
 
   @OneToMany(() => UserDailyMealsEntity, (userDailyMeals : UserDailyMealsEntity) => userDailyMeals.user)
   userDailyMeals: UserDailyMealsEntity[];
+
+  /* Add BeforeInsert(Before Update) - hash password*/
+  @BeforeInsert()
+  emailToLower()
+  {
+    this.email = this.email.toLowerCase();
+  } 
 }

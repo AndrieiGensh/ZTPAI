@@ -16,4 +16,5 @@ export declare class UserEntity {
     diets: DietsEntity[];
     stats: StatisticsEntity[];
     userDailyMeals: UserDailyMealsEntity[];
+    emailToLower(): void;
 }

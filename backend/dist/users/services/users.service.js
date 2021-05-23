@@ -15,14 +15,23 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
+const auth_service_1 = require("../../auth/services/auth.service");
 const typeorm_2 = require("typeorm");
 const users_entity_1 = require("../models/users.entity");
+const user_dto_1 = require("../user.dto");
 let UsersService = class UsersService {
-    constructor(userRepo) {
+    constructor(userRepo, authService) {
         this.userRepo = userRepo;
+        this.authService = authService;
     }
-    create(user) {
-        return this.userRepo.save(user);
+    async create(user) {
+        const hashedPass = await this.authService.hashPassword(user.password);
+        const newUser = new user_dto_1.UserDto;
+        newUser.userInfo = user.userInfo;
+        newUser.email = user.email;
+        newUser.password = hashedPass;
+        newUser.userInfo = user.userInfo;
+        return this.userRepo.save(newUser);
     }
     findAll() {
         return this.userRepo.createQueryBuilder("u").
@@ -32,11 +41,34 @@ let UsersService = class UsersService {
             leftJoinAndSelect("usIn.lifestyle", "usLifestyle").
             getMany();
     }
+    async login(user) {
+        const validationRes = await this.validateUser(user.email, user.password);
+        return await this.authService.generateJWT(validationRes);
+    }
+    async validateUser(email, password) {
+        const user = await this.findByEmail(email);
+        const result = await this.authService.comparePasswords(password, user.password);
+        if (result === true) {
+            return user;
+        }
+        else {
+            throw Error;
+        }
+    }
+    async findByEmail(email) {
+        email = email.toLowerCase();
+        return await this.userRepo.createQueryBuilder('u').
+            addSelect('u.password').
+            addSelect('u.email').
+            where('u.email = :m_email', { m_email: email }).
+            getOne();
+    }
 };
 UsersService = __decorate([
     common_1.Injectable(),
     __param(0, typeorm_1.InjectRepository(users_entity_1.UserEntity)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
+    __metadata("design:paramtypes", [typeorm_2.Repository,
+        auth_service_1.AuthService])
 ], UsersService);
 exports.UsersService = UsersService;
 //# sourceMappingURL=users.service.js.map

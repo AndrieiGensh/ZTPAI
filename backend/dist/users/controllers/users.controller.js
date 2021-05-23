@@ -29,6 +29,10 @@ let UsersController = class UsersController {
     create(userinfo) {
         return this.userService.create(userinfo);
     }
+    async login(user) {
+        const jwt = await this.userService.login(user);
+        return { acces_token: jwt };
+    }
 };
 __decorate([
     common_1.Get(),
@@ -43,6 +47,13 @@ __decorate([
     __metadata("design:paramtypes", [user_dto_1.UserDto]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "create", null);
+__decorate([
+    common_2.Post('login'),
+    __param(0, common_3.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [user_dto_1.UserDto]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "login", null);
 UsersController = __decorate([
     common_4.Controller('users'),
     __metadata("design:paramtypes", [users_service_1.UsersService])
