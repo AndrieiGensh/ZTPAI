@@ -2,8 +2,11 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { Get } from '@nestjs/common';
 import { Post } from '@nestjs/common';
-import { Body } from '@nestjs/common';
+import { Body, Request } from '@nestjs/common';
+import { UseGuards } from '@nestjs/common';
 import { Controller } from '@nestjs/common';
+import { JwtGuard } from 'src/auth/guards/jwt-guard.guard';
+import { LocalAuthGuard } from 'src/auth/guards/local-auth.guard';
 import { UserEntity } from '../models/users.entity';
 import { UsersService } from '../services/users.service';
 import { UserDto } from '../user.dto';
@@ -14,21 +17,26 @@ export class UsersController {
     {
     }
 
+
+    @UseGuards(JwtGuard)
     @Get()
     async findAll() : Promise<UserEntity[]>
     {
         return this.userService.findAll();
     }
 
-    @Post()
-    create(@Body() userinfo : UserDto) : Promise<UserDto>
+    @Post('register')
+    async register(@Body() user : UserDto) : Promise<any>
     {
-        return this.userService.create(userinfo);
+        const token =  await this.userService.create(user);
+        return {access_token : token};
     }
 
+    @UseGuards(LocalAuthGuard)
     @Post('login')
-    async login(@Body() user: UserDto) : Promise<Object>
+    async login(@Body() user : UserDto) : Promise<Object>
     {
+        console.log("Before login methods");
         const jwt = await this.userService.login(user);
         return { acces_token: jwt};
     }

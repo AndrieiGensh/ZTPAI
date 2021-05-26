@@ -17,6 +17,9 @@ const common_1 = require("@nestjs/common");
 const common_2 = require("@nestjs/common");
 const common_3 = require("@nestjs/common");
 const common_4 = require("@nestjs/common");
+const common_5 = require("@nestjs/common");
+const jwt_guard_guard_1 = require("../../auth/guards/jwt-guard.guard");
+const local_auth_guard_1 = require("../../auth/guards/local-auth.guard");
 const users_service_1 = require("../services/users.service");
 const user_dto_1 = require("../user.dto");
 let UsersController = class UsersController {
@@ -26,28 +29,32 @@ let UsersController = class UsersController {
     async findAll() {
         return this.userService.findAll();
     }
-    create(userinfo) {
-        return this.userService.create(userinfo);
+    async register(user) {
+        const token = await this.userService.create(user);
+        return { access_token: token };
     }
     async login(user) {
+        console.log("Before login methods");
         const jwt = await this.userService.login(user);
         return { acces_token: jwt };
     }
 };
 __decorate([
+    common_4.UseGuards(jwt_guard_guard_1.JwtGuard),
     common_1.Get(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "findAll", null);
 __decorate([
-    common_2.Post(),
+    common_2.Post('register'),
     __param(0, common_3.Body()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [user_dto_1.UserDto]),
     __metadata("design:returntype", Promise)
-], UsersController.prototype, "create", null);
+], UsersController.prototype, "register", null);
 __decorate([
+    common_4.UseGuards(local_auth_guard_1.LocalAuthGuard),
     common_2.Post('login'),
     __param(0, common_3.Body()),
     __metadata("design:type", Function),
@@ -55,7 +62,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "login", null);
 UsersController = __decorate([
-    common_4.Controller('users'),
+    common_5.Controller('users'),
     __metadata("design:paramtypes", [users_service_1.UsersService])
 ], UsersController);
 exports.UsersController = UsersController;

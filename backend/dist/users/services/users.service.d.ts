@@ -6,7 +6,7 @@ export declare class UsersService {
     private userRepo;
     private authService;
     constructor(userRepo: Repository<UserEntity>, authService: AuthService);
-    create(user: UserDto): Promise<UserDto>;
+    create(user: UserDto): Promise<string>;
     findAll(): Promise<UserEntity[]>;
     login(user: UserDto): Promise<string>;
     validateUser(email: string, password: string): Promise<UserDto>;

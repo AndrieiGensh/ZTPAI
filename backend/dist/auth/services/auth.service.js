@@ -19,7 +19,8 @@ let AuthService = class AuthService {
         this.jwtService = jwtService;
     }
     async generateJWT(user) {
-        return this.jwtService.signAsync({ user });
+        const payload = { sub: user.id };
+        return this.jwtService.signAsync(payload);
     }
     async hashPassword(password) {
         return bcrypt.hash(password, 10);

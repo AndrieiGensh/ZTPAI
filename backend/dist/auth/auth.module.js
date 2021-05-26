@@ -11,6 +11,11 @@ const common_1 = require("@nestjs/common");
 const jwt_1 = require("@nestjs/jwt");
 const config_1 = require("@nestjs/config");
 const auth_service_1 = require("./services/auth.service");
+const passport_1 = require("@nestjs/passport");
+const local_strategy_1 = require("../auth/strategies/local.strategy");
+const jwt_strategy_1 = require("../auth/strategies/jwt.strategy");
+const users_service_1 = require("../users/services/users.service");
+const users_module_1 = require("../users/users.module");
 let AuthModule = class AuthModule {
 };
 AuthModule = __decorate([
@@ -23,10 +28,12 @@ AuthModule = __decorate([
                     secret: configService.get('JWT_SECRET'),
                     signOptions: { expiresIn: '100s' }
                 })
-            })
+            }),
+            passport_1.PassportModule,
+            common_1.forwardRef(() => users_module_1.UsersModule)
         ],
-        providers: [auth_service_1.AuthService],
-        exports: [auth_service_1.AuthService]
+        providers: [auth_service_1.AuthService, local_strategy_1.LocalStrategy, jwt_strategy_1.JwtStrategy],
+        exports: [auth_service_1.AuthService, local_strategy_1.LocalStrategy, jwt_strategy_1.JwtStrategy]
     })
 ], AuthModule);
 exports.AuthModule = AuthModule;

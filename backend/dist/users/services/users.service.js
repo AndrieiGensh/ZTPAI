@@ -31,7 +31,8 @@ let UsersService = class UsersService {
         newUser.email = user.email;
         newUser.password = hashedPass;
         newUser.userInfo = user.userInfo;
-        return this.userRepo.save(newUser);
+        const registeredUser = await this.userRepo.save(newUser);
+        return this.authService.generateJWT(registeredUser);
     }
     findAll() {
         return this.userRepo.createQueryBuilder("u").
@@ -42,18 +43,21 @@ let UsersService = class UsersService {
             getMany();
     }
     async login(user) {
+        console.log("Inside login");
         const validationRes = await this.validateUser(user.email, user.password);
+        console.log("AfterValidation");
         return await this.authService.generateJWT(validationRes);
     }
     async validateUser(email, password) {
         const user = await this.findByEmail(email);
+        console.log(user.email);
         const result = await this.authService.comparePasswords(password, user.password);
-        if (result === true) {
+        if (result) {
+            console.log("match");
             return user;
         }
-        else {
-            throw Error;
-        }
+        console.log("No match");
+        throw new Error("No match for user credentials");
     }
     async findByEmail(email) {
         email = email.toLowerCase();

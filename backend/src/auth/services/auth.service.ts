@@ -12,7 +12,8 @@ export class AuthService {
 
     async generateJWT(user: UserDto) : Promise<string>
     {
-        return this.jwtService.signAsync({ user });
+        const payload = {sub: user.id};
+        return this.jwtService.signAsync(payload);
     }
 
     async hashPassword(password: string) : Promise<string>
