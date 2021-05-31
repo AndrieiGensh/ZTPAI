@@ -13,17 +13,17 @@ export class FoodEntity {
   @Column({ unique: true})
   name: string;
 
-  @Column()
-  kcalPerUnit: number;
+  @Column({type: 'float'})
+  kcalPerUnit;
 
-  @Column()
-  fatsPerUnit: number;
+  @Column({type: 'float'})
+  fatsPerUnit;
 
-  @Column()
-  carbsPerUnit: number;
+  @Column({type: 'float'})
+  carbsPerUnit;
 
-  @Column()
-  proteinsPerUnit: number;
+  @Column({type: 'float'})
+  proteinsPerUnit;
 
   @ManyToOne(() => MeasureUnitsEntity, (measureUnit : MeasureUnitsEntity) => measureUnit.food)
   measureUnits: MeasureUnitsEntity;

@@ -7,19 +7,19 @@ export class StatisticsEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column( { type: 'timestamptz' } )
+  @Column( { type: 'date' } )
   date: Date;
 
-  @Column()
+  @Column({type: 'float'})
   kcal: number;
 
-  @Column()
+  @Column({type: 'float'})
   fats: number;
 
-  @Column()
+  @Column({type: 'float'})
   carbs: number;
 
-  @Column()
+  @Column({type: 'float'})
   proteins: number;
 
   @ManyToOne(() => UserEntity, (user : UserEntity) => user.stats)

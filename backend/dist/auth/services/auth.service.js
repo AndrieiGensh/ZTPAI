@@ -28,6 +28,9 @@ let AuthService = class AuthService {
     async comparePasswords(newPass, hashedPass) {
         return bcrypt.compare(newPass, hashedPass);
     }
+    async decodeJWT(jwt) {
+        return this.jwtService.decode(jwt);
+    }
 };
 AuthService = __decorate([
     common_1.Injectable(),

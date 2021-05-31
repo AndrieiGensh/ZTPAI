@@ -6,4 +6,7 @@ export declare class AuthService {
     generateJWT(user: UserDto): Promise<string>;
     hashPassword(password: string): Promise<string>;
     comparePasswords(newPass: string, hashedPass: string): Promise<boolean>;
+    decodeJWT(jwt: string): Promise<string | {
+        [key: string]: any;
+    }>;
 }

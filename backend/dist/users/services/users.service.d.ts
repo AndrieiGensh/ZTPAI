@@ -11,4 +11,5 @@ export declare class UsersService {
     login(user: UserDto): Promise<string>;
     validateUser(email: string, password: string): Promise<UserDto>;
     findByEmail(email: string): Promise<UserDto>;
+    findById(id: number): Promise<UserDto>;
 }

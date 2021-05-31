@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MealTypesController } from './controllers/meal-types.controller';
@@ -8,5 +9,6 @@ import { MealTypesService } from './services/meal-types.service';
   imports: [TypeOrmModule.forFeature([MealTypesEntity])],
   controllers: [MealTypesController],
   providers: [MealTypesService],
+  exports: [MealTypesService]
 })
 export class MealTypesModule {}

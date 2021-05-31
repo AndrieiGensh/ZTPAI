@@ -18,6 +18,6 @@ export class UserDailyMealsEntity {
     @ManyToOne(() => MealTypesEntity, (mealType : MealTypesEntity) => mealType.userDailyMeals)
     mealType: MealTypesEntity;
 
-    @Column()
-    amout_of_units: number;
+    @Column({type: 'float'})
+    amount_of_units: number;
 }

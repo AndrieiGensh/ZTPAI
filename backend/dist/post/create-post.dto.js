@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreatePostDto = void 0;
 const class_validator_1 = require("class-validator");
+const user_dto_1 = require("../users/user.dto");
 class CreatePostDto {
 }
 __decorate([
@@ -22,6 +23,14 @@ __decorate([
     __metadata("design:type", String)
 ], CreatePostDto.prototype, "content", void 0);
 __decorate([
+    class_validator_1.IsString(),
+    __metadata("design:type", String)
+], CreatePostDto.prototype, "photoPath", void 0);
+__decorate([
+    class_validator_1.IsString(),
+    __metadata("design:type", String)
+], CreatePostDto.prototype, "title", void 0);
+__decorate([
     class_validator_1.IsNumber(),
     __metadata("design:type", Number)
 ], CreatePostDto.prototype, "likes", void 0);
@@ -29,9 +38,5 @@ __decorate([
     class_validator_1.IsNumber(),
     __metadata("design:type", Number)
 ], CreatePostDto.prototype, "dislikes", void 0);
-__decorate([
-    class_validator_1.IsNumber(),
-    __metadata("design:type", Number)
-], CreatePostDto.prototype, "userId", void 0);
 exports.CreatePostDto = CreatePostDto;
 //# sourceMappingURL=create-post.dto.js.map

@@ -7,6 +7,7 @@ import { UseGuards } from '@nestjs/common';
 import { Controller } from '@nestjs/common';
 import { JwtGuard } from 'src/auth/guards/jwt-guard.guard';
 import { LocalAuthGuard } from 'src/auth/guards/local-auth.guard';
+import { PostFilters } from 'src/post/models/post-filters';
 import { UserEntity } from '../models/users.entity';
 import { UsersService } from '../services/users.service';
 import { UserDto } from '../user.dto';
@@ -16,7 +17,6 @@ export class UsersController {
     constructor(private userService : UsersService)
     {
     }
-
 
     @UseGuards(JwtGuard)
     @Get()
@@ -29,7 +29,7 @@ export class UsersController {
     async register(@Body() user : UserDto) : Promise<any>
     {
         const token =  await this.userService.create(user);
-        return {access_token : token};
+        return {access_token : token, expiresIn: '100'};
     }
 
     @UseGuards(LocalAuthGuard)
@@ -38,6 +38,6 @@ export class UsersController {
     {
         console.log("Before login methods");
         const jwt = await this.userService.login(user);
-        return { acces_token: jwt};
+        return { access_token: jwt, expiresIn: '100'};
     }
 }

@@ -2,9 +2,6 @@
 import { IsNumber, IsString } from 'class-validator';
 
 export class FoodDto{
-    @IsNumber()
-    id: number;
-
     @IsString()
     name: string;
 
@@ -19,4 +16,7 @@ export class FoodDto{
 
     @IsNumber()
     proteinsPerUnit: number;
+
+    @IsString()
+    measurementName: string;
 }

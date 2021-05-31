@@ -10,6 +10,7 @@ export class DishInfoComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
 }

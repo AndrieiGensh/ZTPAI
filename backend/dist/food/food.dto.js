@@ -14,10 +14,6 @@ const class_validator_1 = require("class-validator");
 class FoodDto {
 }
 __decorate([
-    class_validator_1.IsNumber(),
-    __metadata("design:type", Number)
-], FoodDto.prototype, "id", void 0);
-__decorate([
     class_validator_1.IsString(),
     __metadata("design:type", String)
 ], FoodDto.prototype, "name", void 0);
@@ -37,5 +33,9 @@ __decorate([
     class_validator_1.IsNumber(),
     __metadata("design:type", Number)
 ], FoodDto.prototype, "proteinsPerUnit", void 0);
+__decorate([
+    class_validator_1.IsString(),
+    __metadata("design:type", String)
+], FoodDto.prototype, "measurementName", void 0);
 exports.FoodDto = FoodDto;
 //# sourceMappingURL=food.dto.js.map

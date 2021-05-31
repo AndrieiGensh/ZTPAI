@@ -25,4 +25,9 @@ export class AuthService {
     {
         return bcrypt.compare(newPass, hashedPass);
     }
+
+    async decodeJWT(jwt: string): Promise<string | { [key: string]: any; }>
+    {
+        return this.jwtService.decode(jwt);
+    }
 }

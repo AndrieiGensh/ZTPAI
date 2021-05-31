@@ -19,23 +19,23 @@ __decorate([
     __metadata("design:type", Number)
 ], StatisticsEntity.prototype, "id", void 0);
 __decorate([
-    typeorm_1.Column({ type: 'timestamptz' }),
+    typeorm_1.Column({ type: 'date' }),
     __metadata("design:type", Date)
 ], StatisticsEntity.prototype, "date", void 0);
 __decorate([
-    typeorm_1.Column(),
+    typeorm_1.Column({ type: 'float' }),
     __metadata("design:type", Number)
 ], StatisticsEntity.prototype, "kcal", void 0);
 __decorate([
-    typeorm_1.Column(),
+    typeorm_1.Column({ type: 'float' }),
     __metadata("design:type", Number)
 ], StatisticsEntity.prototype, "fats", void 0);
 __decorate([
-    typeorm_1.Column(),
+    typeorm_1.Column({ type: 'float' }),
     __metadata("design:type", Number)
 ], StatisticsEntity.prototype, "carbs", void 0);
 __decorate([
-    typeorm_1.Column(),
+    typeorm_1.Column({ type: 'float' }),
     __metadata("design:type", Number)
 ], StatisticsEntity.prototype, "proteins", void 0);
 __decorate([

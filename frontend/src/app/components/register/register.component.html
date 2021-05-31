@@ -1,16 +1,21 @@
 <div class="sign-in-body">
     <div class="container">
+        <div class="message">
+          <p class="message-content" *ngIf="f().password.touched && f().password.invalid">Not valid Password</p>
+          <p class="message-content" *ngIf="f().email.touched && f().email.invalid">Not valid Email</p>
+          <p class="message-content" *ngIf="f().confirmPassword.touched && registerForm.errors?.mismatch">Not suitable ConfirmPassword</p>
+        </div>
         <div id="login-box">
             <div class="left">
               <h1>Sign up</h1>
-              
-              <input type="text" name="username" placeholder="Username" />
-              <input type="text" name="email" placeholder="E-mail" />
-              <input type="password" name="password" placeholder="Password" />
-              <input type="password" name="password2" placeholder="Retype password" />
-              <div class="buttons">
-                <input type="submit" name="signup_submit" value="Sign me up" routerLink="/user/diary"/>
-              </div>
+              <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <input formControlName="email" type="text" name="email" placeholder="E-mail" />
+                <input formControlName="password" type="password" name="password" placeholder="Password" />
+                <input formControlName="confirmPassword" type="password" name="password2" placeholder="Retype password" />
+                <div class="buttons">
+                  <input type="submit" name="signup_submit" value="Sign me up" [disabled]="!registerForm.valid"/>
+                </div>
+              </form>
             </div>
             
             <div class="right">

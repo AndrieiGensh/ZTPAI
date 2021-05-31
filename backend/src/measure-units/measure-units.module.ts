@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MeasureUnitsController } from './controllers/measure-units.controller';
@@ -8,5 +9,6 @@ import { MeasureUnitsService } from './services/measure-units.service';
   imports: [TypeOrmModule.forFeature([MeasureUnitsEntity])],
   controllers: [MeasureUnitsController],
   providers: [MeasureUnitsService],
+  exports: [MeasureUnitsService]
 })
 export class MeasureUnitsModule {}

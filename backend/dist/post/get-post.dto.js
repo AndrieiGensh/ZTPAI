@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GetPostDto = void 0;
 const class_validator_1 = require("class-validator");
+const comment_dto_1 = require("../comment/comment.dto");
 const user_dto_1 = require("../users/user.dto");
 class GetPostDto {
 }
@@ -25,7 +26,15 @@ __decorate([
 __decorate([
     class_validator_1.IsString(),
     __metadata("design:type", String)
+], GetPostDto.prototype, "title", void 0);
+__decorate([
+    class_validator_1.IsString(),
+    __metadata("design:type", String)
 ], GetPostDto.prototype, "content", void 0);
+__decorate([
+    class_validator_1.IsString(),
+    __metadata("design:type", String)
+], GetPostDto.prototype, "photoPath", void 0);
 __decorate([
     class_validator_1.IsNumber(),
     __metadata("design:type", Number)

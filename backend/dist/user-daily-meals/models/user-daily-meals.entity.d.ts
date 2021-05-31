@@ -6,5 +6,5 @@ export declare class UserDailyMealsEntity {
     user: UserEntity;
     meal: FoodEntity;
     mealType: MealTypesEntity;
-    amout_of_units: number;
+    amount_of_units: number;
 }

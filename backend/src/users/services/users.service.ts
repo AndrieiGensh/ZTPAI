@@ -76,4 +76,15 @@ export class UsersService {
         getOne();
     }
 
+    async findById(id: number): Promise<UserDto>
+    {
+        return this.userRepo.createQueryBuilder("u").
+            leftJoinAndSelect("u.userInfo", "usIn").
+            leftJoinAndSelect("usIn.sex", "usSex").
+            leftJoinAndSelect("usIn.namesurname", "usNamesurname").
+            leftJoinAndSelect("usIn.lifestyle", "usLifestyle").
+            where('u.id = :UID', {UID: id}).
+            getOne();
+    }
+
 }

@@ -1,4 +1,3 @@
-import { GetPostDto } from 'src/post/get-post.dto';
 import { UserDto } from 'src/users/user.dto';
 export declare class CommentDto {
     id: number;
@@ -7,5 +6,4 @@ export declare class CommentDto {
     likes: number;
     dislikes: number;
     user: UserDto;
-    post: GetPostDto;
 }

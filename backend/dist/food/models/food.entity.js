@@ -26,20 +26,20 @@ __decorate([
     __metadata("design:type", String)
 ], FoodEntity.prototype, "name", void 0);
 __decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", Number)
+    typeorm_1.Column({ type: 'float' }),
+    __metadata("design:type", Object)
 ], FoodEntity.prototype, "kcalPerUnit", void 0);
 __decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", Number)
+    typeorm_1.Column({ type: 'float' }),
+    __metadata("design:type", Object)
 ], FoodEntity.prototype, "fatsPerUnit", void 0);
 __decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", Number)
+    typeorm_1.Column({ type: 'float' }),
+    __metadata("design:type", Object)
 ], FoodEntity.prototype, "carbsPerUnit", void 0);
 __decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", Number)
+    typeorm_1.Column({ type: 'float' }),
+    __metadata("design:type", Object)
 ], FoodEntity.prototype, "proteinsPerUnit", void 0);
 __decorate([
     typeorm_1.ManyToOne(() => measure_units_entity_1.MeasureUnitsEntity, (measureUnit) => measureUnit.food),

@@ -19,6 +19,7 @@ MealTypesModule = __decorate([
         imports: [typeorm_1.TypeOrmModule.forFeature([meal_types_entity_1.MealTypesEntity])],
         controllers: [meal_types_controller_1.MealTypesController],
         providers: [meal_types_service_1.MealTypesService],
+        exports: [meal_types_service_1.MealTypesService]
     })
 ], MealTypesModule);
 exports.MealTypesModule = MealTypesModule;

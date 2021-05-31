@@ -33,9 +33,9 @@ __decorate([
     __metadata("design:type", meal_types_entity_1.MealTypesEntity)
 ], UserDailyMealsEntity.prototype, "mealType", void 0);
 __decorate([
-    typeorm_1.Column(),
+    typeorm_1.Column({ type: 'float' }),
     __metadata("design:type", Number)
-], UserDailyMealsEntity.prototype, "amout_of_units", void 0);
+], UserDailyMealsEntity.prototype, "amount_of_units", void 0);
 UserDailyMealsEntity = __decorate([
     typeorm_1.Entity()
 ], UserDailyMealsEntity);

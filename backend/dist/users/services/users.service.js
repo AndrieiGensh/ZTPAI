@@ -67,6 +67,15 @@ let UsersService = class UsersService {
             where('u.email = :m_email', { m_email: email }).
             getOne();
     }
+    async findById(id) {
+        return this.userRepo.createQueryBuilder("u").
+            leftJoinAndSelect("u.userInfo", "usIn").
+            leftJoinAndSelect("usIn.sex", "usSex").
+            leftJoinAndSelect("usIn.namesurname", "usNamesurname").
+            leftJoinAndSelect("usIn.lifestyle", "usLifestyle").
+            where('u.id = :UID', { UID: id }).
+            getOne();
+    }
 };
 UsersService = __decorate([
     common_1.Injectable(),

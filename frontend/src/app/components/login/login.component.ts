@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { LoginService } from './login.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +11,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  loginForm!: FormGroup;
 
-  ngOnInit(): void {
+  constructor(
+    private fb: FormBuilder,
+    private loginService: LoginService,
+    private router: Router
+  ) { }
+
+  ngOnInit() 
+  {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required]
+    });
+  }
+
+  async onSubmit()
+  {
+    const loginInfo = {
+      email: this.loginForm.value.email,
+      password: this.loginForm.value.password
+    };
+    await this.loginService.requestLogin(loginInfo.email, loginInfo.password)
+    .subscribe({
+      next: data =>{
+        console.log(data);
+        this.loginService.setSession(data);
+        this.router.navigate(['/user/diary']);
+      },
+      error: error=>{
+        console.log("There was an error", error);
+      }
+    });
   }
 
 }

@@ -20,6 +20,7 @@ const common_4 = require("@nestjs/common");
 const common_5 = require("@nestjs/common");
 const jwt_guard_guard_1 = require("../../auth/guards/jwt-guard.guard");
 const local_auth_guard_1 = require("../../auth/guards/local-auth.guard");
+const post_filters_1 = require("../../post/models/post-filters");
 const users_service_1 = require("../services/users.service");
 const user_dto_1 = require("../user.dto");
 let UsersController = class UsersController {
@@ -31,12 +32,12 @@ let UsersController = class UsersController {
     }
     async register(user) {
         const token = await this.userService.create(user);
-        return { access_token: token };
+        return { access_token: token, expiresIn: '100' };
     }
     async login(user) {
         console.log("Before login methods");
         const jwt = await this.userService.login(user);
-        return { acces_token: jwt };
+        return { access_token: jwt, expiresIn: '100' };
     }
 };
 __decorate([

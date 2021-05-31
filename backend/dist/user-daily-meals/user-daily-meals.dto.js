@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserDailyMealsDto = void 0;
 const class_validator_1 = require("class-validator");
+const create_food_dto_1 = require("../food/create-food.dto");
 const food_dto_1 = require("../food/food.dto");
 const meal_types_dto_1 = require("../meal-types/meal-types.dto");
 const user_dto_1 = require("../users/user.dto");

@@ -23,25 +23,37 @@ let FoodController = class FoodController {
         this.foodService = foodService;
     }
     create(food) {
+        console.log(food);
         return this.foodService.create(food);
     }
     async findAll() {
         return this.foodService.findAll();
     }
+    findOneByName(name) {
+        console.log(name);
+        return this.foodService.findByName(name);
+    }
 };
 __decorate([
-    request_mapping_decorator_1.Post(),
+    request_mapping_decorator_1.Post('new'),
     __param(0, route_params_decorator_1.Body()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [food_dto_1.FoodDto]),
     __metadata("design:returntype", Promise)
 ], FoodController.prototype, "create", null);
 __decorate([
-    request_mapping_decorator_1.Get(),
+    request_mapping_decorator_1.Get('all'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], FoodController.prototype, "findAll", null);
+__decorate([
+    request_mapping_decorator_1.Get('one-like/:name'),
+    __param(0, route_params_decorator_1.Param('name')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], FoodController.prototype, "findOneByName", null);
 FoodController = __decorate([
     common_1.Controller('food'),
     __metadata("design:paramtypes", [food_service_1.FoodService])

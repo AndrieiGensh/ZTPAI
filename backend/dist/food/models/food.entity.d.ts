@@ -5,10 +5,10 @@ import { RecipeIngridientsEntity } from '../../recipe-ingridients/models/recipe-
 export declare class FoodEntity {
     id: number;
     name: string;
-    kcalPerUnit: number;
-    fatsPerUnit: number;
-    carbsPerUnit: number;
-    proteinsPerUnit: number;
+    kcalPerUnit: any;
+    fatsPerUnit: any;
+    carbsPerUnit: any;
+    proteinsPerUnit: any;
     measureUnits: MeasureUnitsEntity;
     recipe_ingridients: RecipeIngridientsEntity[];
     userDailyMeals: UserDailyMealsEntity[];

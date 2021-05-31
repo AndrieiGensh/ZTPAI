@@ -19,6 +19,7 @@ MeasureUnitsModule = __decorate([
         imports: [typeorm_1.TypeOrmModule.forFeature([measure_units_entity_1.MeasureUnitsEntity])],
         controllers: [measure_units_controller_1.MeasureUnitsController],
         providers: [measure_units_service_1.MeasureUnitsService],
+        exports: [measure_units_service_1.MeasureUnitsService]
     })
 ], MeasureUnitsModule);
 exports.MeasureUnitsModule = MeasureUnitsModule;
