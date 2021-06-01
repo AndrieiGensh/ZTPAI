@@ -4492,8 +4492,8 @@
         "affectsGlobalScope": false
       },
       "../src/statistics/controllers/statistics.controller.ts": {
-        "version": "46cebcc7625285830c3de34fe424b987538f8c0a1014f5b690a44aeb52b05d73",
-        "signature": "4bade25bfa3ed7cfc785f55ebca2fac46eb957e364fdb0c915a9f0941e9c8af9",
+        "version": "408f0ea4417fab3abe5f894a7f78538039dca44352cbe0f8f073fa6cfde3fca3",
+        "signature": "ed7f5b1cd4580358ed20674a507fa5245270a7d7bfeb7bf2448f688741979d06",
         "affectsGlobalScope": false
       },
       "../src/statistics/statistics.module.ts": {

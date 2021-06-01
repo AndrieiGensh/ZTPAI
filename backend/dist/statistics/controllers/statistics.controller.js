@@ -21,8 +21,9 @@ let StatisticsController = class StatisticsController {
     constructor(statsService) {
         this.statsService = statsService;
     }
-    async getStats(user, body) {
-        return this.statsService.getStats(user.userId, body.type, body.days, body.date);
+    async getStats(user, query, body, param) {
+        console.log("REMASTERED getStats ROUTE WITH QUERY PARAMS: ", query, "/", body, "/", param);
+        return this.statsService.getStats(user.userId, query.type, query.days, query.date);
     }
     async getAllStats() {
         return this.statsService.getAllStatsFroTesting();
@@ -31,9 +32,9 @@ let StatisticsController = class StatisticsController {
 __decorate([
     common_1.UseGuards(jwt_guard_guard_1.JwtGuard),
     common_1.Get(),
-    __param(0, authuser_decorator_1.AuthUser()), __param(1, common_1.Body()),
+    __param(0, authuser_decorator_1.AuthUser()), __param(1, common_1.Query()), __param(2, common_1.Body()), __param(3, common_1.Param()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [Object, Object, Object, Object]),
     __metadata("design:returntype", Promise)
 ], StatisticsController.prototype, "getStats", null);
 __decorate([
