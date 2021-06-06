@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Delete, Get, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Put, Query, UseGuards } from '@nestjs/common';
 import { AuthUser } from 'src/auth/decorators/authuser.decorator';
 import { JwtGuard } from 'src/auth/guards/jwt-guard.guard';
 import { UserDailyMealsService } from '../services/user-daily-meals.service';
@@ -13,10 +13,11 @@ export class UserDailyMealsController {
 
     @UseGuards(JwtGuard)
     @Get()
-    async getDataForUser(@AuthUser() user: any): Promise<any>
+    async getDataForUser(@AuthUser() user: any, @Query() query): Promise<any>
     {
-        console.log(user)
-        return this.userMealsService.getMealsForUser(user.userId);
+        console.log(user);
+        console.log("The query is ", query, query.mealType);
+        return this.userMealsService.getMealsForUser(user.userId, query.mealType);
     }
 
     @UseGuards(JwtGuard)
@@ -35,9 +36,9 @@ export class UserDailyMealsController {
 
     @UseGuards(JwtGuard)
     @Delete()
-    async deleteRecord(@AuthUser() user, @Body() body): Promise<any>
+    async deleteRecord(@AuthUser() user, @Query() query): Promise<any>
     {
-        return this.userMealsService.deleteUsersMeal(body.recordId, user.userId, body.date);
+        return this.userMealsService.deleteUsersMeal(query.recordId, user.userId, query.date);
     }
     
 }

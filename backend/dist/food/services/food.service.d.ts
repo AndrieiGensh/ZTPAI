@@ -9,6 +9,6 @@ export declare class FoodService {
     constructor(foodRepo: Repository<FoodEntity>, muService: MeasureUnitsService);
     create(food: FoodDto): Promise<CreateFoodDto>;
     findAll(): Promise<FoodDto[]>;
-    findByName(name: string): Promise<FoodDto>;
+    findByName(name: string): Promise<FoodDto[]>;
     findEntityByName(name: string): Promise<CreateFoodDto>;
 }

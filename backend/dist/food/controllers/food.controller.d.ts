@@ -6,5 +6,5 @@ export declare class FoodController {
     constructor(foodService: FoodService);
     create(food: FoodDto): Promise<CreateFoodDto>;
     findAll(): Promise<FoodDto[]>;
-    findOneByName(name: string): Promise<FoodDto>;
+    findManyByName(query: any): Promise<FoodDto[]>;
 }

@@ -49,13 +49,13 @@ export class FoodService {
         leftJoin('f.measureUnits', 'mu').addSelect('mu.name','unitName').getRawMany();
     }
 
-    findByName(name: string): Promise<FoodDto>
+    findByName(name: string): Promise<FoodDto[]>
     {
         return this.foodRepo.createQueryBuilder('f')
         .select('f.name', 'food_name').addSelect('f.kcalPerUnit','kcals').addSelect('f.fatsPerUnit','fats')
         .addSelect('f.carbsPerUnit','carbs').addSelect('f.proteinsPerUnit','proteins')
         .leftJoin('f.measureUnits', 'mu').addSelect('mu.name','unitName')
-        .where("f.name like '%' || :foodName || '%'", {foodName: name}).getRawOne();
+        .where("f.name like '%' || :foodName || '%'", {foodName: name}).getRawMany();
     }    
 
     findEntityByName(name: string): Promise<CreateFoodDto>

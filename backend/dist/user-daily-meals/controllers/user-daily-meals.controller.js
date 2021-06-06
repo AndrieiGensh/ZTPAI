@@ -21,9 +21,10 @@ let UserDailyMealsController = class UserDailyMealsController {
     constructor(userMealsService) {
         this.userMealsService = userMealsService;
     }
-    async getDataForUser(user) {
+    async getDataForUser(user, query) {
         console.log(user);
-        return this.userMealsService.getMealsForUser(user.userId);
+        console.log("The query is ", query, query.mealType);
+        return this.userMealsService.getMealsForUser(user.userId, query.mealType);
     }
     async addNewMealForUser(user, body) {
         return this.userMealsService.addNewMeal(user.userId, body.foodName, body.type, body.amount, body.date);
@@ -31,16 +32,16 @@ let UserDailyMealsController = class UserDailyMealsController {
     async updateUserMealsRecords(user, body) {
         return this.userMealsService.updateUsersMealAndStats(user.userId, body.recordId, body.amount, body.date);
     }
-    async deleteRecord(user, body) {
-        return this.userMealsService.deleteUsersMeal(body.recordId, user.userId, body.date);
+    async deleteRecord(user, query) {
+        return this.userMealsService.deleteUsersMeal(query.recordId, user.userId, query.date);
     }
 };
 __decorate([
     common_1.UseGuards(jwt_guard_guard_1.JwtGuard),
     common_1.Get(),
-    __param(0, authuser_decorator_1.AuthUser()),
+    __param(0, authuser_decorator_1.AuthUser()), __param(1, common_1.Query()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], UserDailyMealsController.prototype, "getDataForUser", null);
 __decorate([
@@ -62,7 +63,7 @@ __decorate([
 __decorate([
     common_1.UseGuards(jwt_guard_guard_1.JwtGuard),
     common_1.Delete(),
-    __param(0, authuser_decorator_1.AuthUser()), __param(1, common_1.Body()),
+    __param(0, authuser_decorator_1.AuthUser()), __param(1, common_1.Query()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)

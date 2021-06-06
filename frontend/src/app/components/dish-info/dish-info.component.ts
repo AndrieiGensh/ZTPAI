@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { StatsService } from './stats.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-dish-info',
@@ -22,8 +23,9 @@ export class DishInfoComponent implements OnInit {
   InitTimeLineData: any;
 
   async ngOnInit(): Promise<void> {
-      this.initDailyStats();
-      this.initTimeLineStats();
+    const date : string = moment().format('YYYY-MM-DD');
+      this.initDailyStats(date);
+      this.initTimeLineStats(date);
   }
 
   transformData(input: any, option: string)
@@ -37,7 +39,7 @@ export class DishInfoComponent implements OnInit {
         console.log(categories);
         for(let category of categories)
         {
-          if(category === "date")
+          if(category === "date" || category === "id")
           {
             continue;
           }
@@ -53,7 +55,7 @@ export class DishInfoComponent implements OnInit {
         console.log(linesNames);
         for(let name of linesNames)
         {
-          if(name === "date")
+          if(name === "date" || name === "id")
           {
             continue;
           }
@@ -66,7 +68,7 @@ export class DishInfoComponent implements OnInit {
           let fields: string[] = Object.keys(obj);
           for(let field of fields)
           {
-            if(field === "date")
+            if(field === "date" || field === "id")
             {
               continue;
             }
@@ -91,9 +93,9 @@ export class DishInfoComponent implements OnInit {
     return lines;
   }
 
-  async initDailyStats()
+  async initDailyStats(date: string)
   {
-    await this.statsService.requestStatsInitData("daily", 10, "2021-06-01")
+    await this.statsService.requestStatsInitData("daily", 10, date)
       .subscribe({
         next: data =>{
           console.log(data);
@@ -105,9 +107,9 @@ export class DishInfoComponent implements OnInit {
     });
   }
 
-  async initTimeLineStats()
+  async initTimeLineStats(date: string)
   {
-    await this.statsService.requestStatsInitData("timeline", 10, "2021-06-01")
+    await this.statsService.requestStatsInitData("timeline", 10, date)
       .subscribe({
         next: data =>{
           console.log(data);

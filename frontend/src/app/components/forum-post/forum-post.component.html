@@ -1,19 +1,19 @@
 <div class="dish-post">
     <div class="dish-photo">
-       <!-- {{post.image}}-->
+       <img [src]="saveUrl" #photo>
     </div>
-    <div class="dish-header">
-       <!-- {{post.header}}-->
+    <div class="dish-title">
+       {{post.title}}
     </div>
-    <div class="dish-description">
-        <!--{{post.description}}-->
+    <div class="dish-content">
+        {{post.content}}
     </div>
     <div class="dish-raiting-div">
         <div class="likes">
-            <!--{{post.likes}}-->
+            {{post.likes}}
         </div>
         <div class="dislikes">
-            <!--{{post.dislikes}}-->
+            {{post.dislikes}}
         </div>
         <div class="comment-count">
             <!--{{post.commentCount}}-->

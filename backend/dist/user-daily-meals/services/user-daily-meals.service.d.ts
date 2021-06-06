@@ -13,7 +13,7 @@ export declare class UserDailyMealsService {
     private userService;
     private statsService;
     constructor(mealsRepo: Repository<UserDailyMealsEntity>, foodService: FoodService, muService: MeasureUnitsService, mealTypesService: MealTypesService, userService: UsersService, statsService: StatisticsService);
-    getMealsForUser(userId: number): Promise<any[]>;
+    getMealsForUser(userId: number, mealType: string): Promise<any[]>;
     addNewMeal(userId: number, foodName: string, type: string, amount: number, date: string): Promise<any>;
     updateUsersMealAndStats(userId: number, recordId: number, amount: number, date: string): Promise<any[]>;
     deleteUsersMeal(recordId: number, userId: number, date: string): Promise<any>;

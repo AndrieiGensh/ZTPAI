@@ -3,6 +3,17 @@
     width: 70vw;
 }
 
+.tables
+{
+    width: 70vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: auto;
+    min-height: 100%;
+}
+
 .table-name{
     margin:0 auto 1em auto;
     padding: 1em;

@@ -4277,17 +4277,22 @@
         "affectsGlobalScope": false
       },
       "../src/post/services/post.service.ts": {
-        "version": "62ac59ac877db6a8da91d2ad0b7dd2ae70d92df194c439d36b85bac4de3edf5b",
-        "signature": "938363fa663889399aa0126e2adb85dd1ff8111480ebb1d81e1cb5ac10219025",
+        "version": "fe499d1c08fb860b2049a6a97a6a42a902c6ef561df9471e31f2bcf556ad42ff",
+        "signature": "26a5c607fc86c7a61ea44ebd8e23560111667d7f7ef700926d21c5faff514190",
+        "affectsGlobalScope": false
+      },
+      "../src/auth/decorators/authuser.decorator.ts": {
+        "version": "2d9ca6409b08a128d5ef7284534b57340bd97041a8d4a3d3de5842ab2cce0df4",
+        "signature": "39f1854d822903f55436538848bbbfb1a5e55ce2097a9807f2db0fc550d0847b",
         "affectsGlobalScope": false
       },
       "../src/post/controllers/post.controller.ts": {
-        "version": "ab4972432a9c75995c0cc795b158e58958ef7adc5aac56bb81d68395d9576a85",
-        "signature": "e70f436def2c7d18e062e4f2b832bff2cc0c2eb6d773a066b094a20906a7a96a",
+        "version": "c83ba1a2db00730165c5dfc419537cddfdeca1762e93cabb7bad445605d02122",
+        "signature": "79acd5bf8d3438e67563a62b821483fab5248ce9252c38c57530f46ae308b28c",
         "affectsGlobalScope": false
       },
       "../src/post/post.module.ts": {
-        "version": "ec26e8fe93eb6ab56873a1f33fe6b5bd71f4029f35145f04230d3638396b9cb8",
+        "version": "35882d40ceb7263b21fe10d6366364d32b53371cf903f41a0a53837233f3b363",
         "signature": "7bf140e14c249fc75b6f06bc529859eb6a7efd33ba119f08154389ac38e45997",
         "affectsGlobalScope": false
       },
@@ -4377,13 +4382,13 @@
         "affectsGlobalScope": false
       },
       "../src/food/services/food.service.ts": {
-        "version": "625ffbc2327d3bde208104214a2d14a45aafa0f67e71ab63c22b66fe09b7f1d4",
-        "signature": "a8321e7d9a2b4cee975c2962b462d2bf2e09e2ab5cfb85d790862b57f74605ca",
+        "version": "2d940d334277e4c8b92e37e1168f8701c2daa48808fd5e3048ee7f1b62aa7cf6",
+        "signature": "0d174a2f94571f238cd4dafd7932c43ccc78ff9d3114f70a7a1af7bcda976fbb",
         "affectsGlobalScope": false
       },
       "../src/food/controllers/food.controller.ts": {
-        "version": "030b934327964653cd0e617e2a08f912ff51933e0c110b850ddc6b2582a6efbd",
-        "signature": "3fa74fcea6afcc640a3c69ab70e7b3c7a2ffdd08ea6a3aad40bb6e60b00fe366",
+        "version": "583da7ffc6800d78d6bbd729cb8f9ec3204339fefb3d769f6172b564374eb95c",
+        "signature": "b5bf3bf5e95f4c321c475df9166a53aafde95dcb293504312fb44a7021a8671b",
         "affectsGlobalScope": false
       },
       "../src/food/food.module.ts": {
@@ -4466,11 +4471,6 @@
         "signature": "cd51cb5314b2b8557b86819662b1bfeb27a4aee0a433c1ea959f3d03a00b59bc",
         "affectsGlobalScope": false
       },
-      "../src/auth/decorators/authuser.decorator.ts": {
-        "version": "2d9ca6409b08a128d5ef7284534b57340bd97041a8d4a3d3de5842ab2cce0df4",
-        "signature": "39f1854d822903f55436538848bbbfb1a5e55ce2097a9807f2db0fc550d0847b",
-        "affectsGlobalScope": false
-      },
       "../src/statistics/create-stats.dto.ts": {
         "version": "769217e71a4022d7c5024ef0bedd41a21a534853f33bacd278dd418ae96b33bf",
         "signature": "2ba5cdd14d749bb1a328c4bc3b62773fb4fdfe27adb5ac5d3922dfb55f913c73",
@@ -4487,7 +4487,7 @@
         "affectsGlobalScope": false
       },
       "../src/statistics/services/statistics.service.ts": {
-        "version": "f27b035838311225518a40d67927ca98a55af749749a7a2507a5659d05beed8b",
+        "version": "bcde4513acb87e180983ecc8ca48d6890f90e59bd434943beebdfe322cda76fd",
         "signature": "65ef50e31a3d10261ad36558a0fc37773f5292c4ef09005cce6879742d9fa3c7",
         "affectsGlobalScope": false
       },
@@ -4512,13 +4512,13 @@
         "affectsGlobalScope": false
       },
       "../src/user-daily-meals/services/user-daily-meals.service.ts": {
-        "version": "156aa85c3a20cfd6b1ded62abe5309340badf40be655172a47c80f77b2ba41aa",
-        "signature": "599ee8a4340e36e5bae665c88993d49d72f524b1ca0e833c86ef5cbed643badf",
+        "version": "bf4f72c5e1ea21fe95cdd8e5dd1b331f6b17b1ba88392c325b20c81e562eab8e",
+        "signature": "c537320b31977c13c27cc5345994e1eaab33cfc79fb1a59326809b1403a17ed1",
         "affectsGlobalScope": false
       },
       "../src/user-daily-meals/controllers/user-daily-meals.controller.ts": {
-        "version": "0669bf35887a19098ab1ee259e03bd50a62faaab762b71c33ae96eb13b736ff9",
-        "signature": "996bde558523142f2286d411317277fe25722ddf4e4e6abac6c794dff7c2a7a6",
+        "version": "4fef5c1406c52cd61e77b60a9d62f9a07093701902577b9a7b00f7ef7e7735fc",
+        "signature": "d33c2c34c02e9ce4df64414ad53717a1a3a0c4651e92085136fedcabdc580be7",
         "affectsGlobalScope": false
       },
       "../src/user-daily-meals/user-daily-meals.module.ts": {
@@ -8428,6 +8428,8 @@
       "../src/post/controllers/post.controller.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@nestjs/platform-express/index.d.ts",
+        "../node_modules/@types/node/path.d.ts",
+        "../src/auth/decorators/authuser.decorator.ts",
         "../src/auth/guards/jwt-guard.guard.ts",
         "../src/post/create-post.dto.ts",
         "../src/post/get-post.dto.ts",
@@ -8452,7 +8454,8 @@
         "../node_modules/@nestjs/typeorm/index.d.ts",
         "../src/post/controllers/post.controller.ts",
         "../src/post/models/post.entity.ts",
-        "../src/post/services/post.service.ts"
+        "../src/post/services/post.service.ts",
+        "../src/users/users.module.ts"
       ],
       "../src/post/services/post.service.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
@@ -8461,7 +8464,9 @@
         "../src/post/create-post.dto.ts",
         "../src/post/get-post.dto.ts",
         "../src/post/models/post-filters.ts",
-        "../src/post/models/post.entity.ts"
+        "../src/post/models/post.entity.ts",
+        "../src/users/models/users.entity.ts",
+        "../src/users/services/users.service.ts"
       ],
       "../src/recipe-ingridients/controllers/recipe-ingridients.controller.ts": [
         "../node_modules/@nestjs/common/index.d.ts"
@@ -12066,7 +12071,8 @@
         "../src/post/create-post.dto.ts",
         "../src/post/get-post.dto.ts",
         "../src/post/models/post-filters.ts",
-        "../src/post/models/post.entity.ts"
+        "../src/post/models/post.entity.ts",
+        "../src/users/services/users.service.ts"
       ],
       "../src/recipe-ingridients/models/recipe-ingridients.entity.ts": [
         "../src/food/models/food.entity.ts",

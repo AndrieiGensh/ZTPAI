@@ -17,58 +17,94 @@ const common_1 = require("@nestjs/common");
 const platform_express_1 = require("@nestjs/platform-express");
 const multer_1 = require("multer");
 const jwt_guard_guard_1 = require("../../auth/guards/jwt-guard.guard");
-const create_post_dto_1 = require("../create-post.dto");
 const post_service_1 = require("../services/post.service");
+const authuser_decorator_1 = require("../../auth/decorators/authuser.decorator");
+const path = require("path");
+const path_1 = require("path");
+const uuid_1 = require("uuid");
 let PostController = class PostController {
     constructor(postService) {
         this.postService = postService;
     }
-    async create(image, body) {
-        const newPost = new create_post_dto_1.CreatePostDto();
-        newPost.content = body.content;
-        newPost.dislikes = body.dislikes;
-        newPost.likes = body.likes;
-        newPost.hashtags = body.hashtags;
-        newPost.title = body.title;
-        newPost.user = body.user;
-        newPost.photoPath = image.filename;
-        return this.postService.createPost(newPost);
+    async create(image, user, body) {
+        console.log("About to begin creating new post");
+        return this.postService.createPost(user.userId, body.title, body.content, image.filename, body.hashtags, body.date);
     }
-    async getNMostRatedPosts(N) {
-        return this.postService.getNMostPopularPosts(N);
+    async getNMostRatedPosts(query) {
+        return this.postService.getNMostPopularPosts(query.n);
     }
     async getPostById(id) {
+        console.log("I am in getPostById and id = ", id);
         return this.postService.getPostById(id);
+    }
+    async getPostImage(query, res) {
+        console.log(query);
+        const post = await this.postService.getPostById(query.postId.toString());
+        if (post === undefined) {
+            return Error("No such post for a given Id");
+        }
+        console.log("Founf the post ", post);
+        const imagePath = post.photoPath;
+        return res.sendFile(path_1.join(process.cwd(), 'src/uploads/' + imagePath));
+    }
+    async updateLikesDislikes(body) {
+        return this.postService.updateLikesDislikes(body.postId, body.likes, body.dislikes);
     }
 };
 __decorate([
     common_1.UseGuards(jwt_guard_guard_1.JwtGuard),
-    common_1.Post('new-post'),
+    common_1.Post('/create-post'),
     common_1.UseInterceptors(platform_express_1.FileInterceptor('image', {
         storage: multer_1.diskStorage({
-            destination: '../../uploads'
+            destination: (req, file, cb) => {
+                cb(null, 'src/uploads');
+            },
+            filename: (req, file, cb) => {
+                const filename = path.parse(file.originalname).name.replace(/\s/g, '') + uuid_1.v4();
+                console.log('File name now = ', filename);
+                const extension = path.parse(file.originalname).ext;
+                console.log('Extension = ', extension);
+                cb(null, filename + '-' + extension);
+            }
         }),
     })),
-    __param(0, common_1.UploadedFile()), __param(1, common_1.Body()),
+    __param(0, common_1.UploadedFile()), __param(1, authuser_decorator_1.AuthUser()), __param(2, common_1.Body()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [Object, Object, Object]),
     __metadata("design:returntype", Promise)
 ], PostController.prototype, "create", null);
 __decorate([
     common_1.UseGuards(jwt_guard_guard_1.JwtGuard),
-    common_1.Get('rated'),
+    common_1.Get('/rated'),
+    __param(0, common_1.Query()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], PostController.prototype, "getNMostRatedPosts", null);
 __decorate([
     common_1.UseGuards(jwt_guard_guard_1.JwtGuard),
-    common_1.Get(':id'),
+    common_1.Get('/get-post-by-id/:id'),
     __param(0, common_1.Param('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], PostController.prototype, "getPostById", null);
+__decorate([
+    common_1.UseGuards(jwt_guard_guard_1.JwtGuard),
+    common_1.Get('/post'),
+    __param(0, common_1.Query()), __param(1, common_1.Res()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], PostController.prototype, "getPostImage", null);
+__decorate([
+    common_1.UseGuards(jwt_guard_guard_1.JwtGuard),
+    common_1.Put(),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], PostController.prototype, "updateLikesDislikes", null);
 PostController = __decorate([
     common_1.Controller('posts'),
     __metadata("design:paramtypes", [post_service_1.PostService])

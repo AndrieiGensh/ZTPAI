@@ -31,17 +31,20 @@ export class UserDailyMealsService {
         private statsService: StatisticsService
     ){}
 
-    async getMealsForUser(userId: number): Promise<any[]>
+    async getMealsForUser(userId: number, mealType: string): Promise<any[]>
     {
+        console.log("I am in the service and meal type is ", mealType);
         return this.mealsRepo.createQueryBuilder('m')
         .leftJoin('m.meal', 'food').leftJoin('m.mealType', 'mType').leftJoin('food.measureUnits','mu').
         leftJoin('m.user', 'u').select('m.id', 'recordId'). addSelect('food.name', 'foodName').addSelect('mu.name','MUName')
-        .addSelect('mType.name','mealType').addSelect('m.amount_of_units').where('u.id = :usId', {usId: userId})
+        .addSelect('mType.name','mealType').addSelect('m.amount_of_units', 'amount').where('u.id = :usId', {usId: userId})
+        .andWhere("mType.name = :myMealType", {myMealType: mealType})
         .getRawMany();
     }
 
     async addNewMeal(userId: number, foodName: string, type: string, amount: number, date: string): Promise<any>
     {
+        console.log("SO THE DATE IN ADDING METHID IN USER MEALS IS ", date);
         const food: CreateFoodDto = await this.foodService.findEntityByName(foodName);
         console.log(food);
         if(food === undefined)
@@ -68,25 +71,26 @@ export class UserDailyMealsService {
         stats.kcal = food.kcalPerUnit * amount;
         stats.proteins = food.proteinsPerUnit * amount;
         stats.date = new Date(date);
-        console.log("New stst that is about to be added to the stats table after adding new meal: ", stats);
+        console.log("New stst that is about to be added to the stats table after adding new meal: ", stats, stats.date.toISOString());
         await this.statsService.addOrUpdateStats(stats, userId, date);
         // MUST RETURN getMealsForUserId call result
-        return this.getMealsForUser(userId);
+        return this.getMealsForUser(userId, type);
     }
+
 
     async updateUsersMealAndStats(userId: number, recordId: number, amount: number, date: string): Promise<any[]>
     {
         const oldRecord: UserDailyMealsDto = await this.mealsRepo.createQueryBuilder('m')
         .leftJoinAndSelect('m.meal', 'ml').leftJoinAndSelect('m.user', 'us').leftJoinAndSelect('m.mealType', 'mt')
         .where('m.id = :mealId', {mealId: recordId}).getOne();
-        console.log(oldRecord);
+        console.log('Old record = ', oldRecord);
         const food: CreateFoodDto = oldRecord.meal;
-        console.log(food);
+        console.log('Food in this record is ',food);
         const oldAmount: number = oldRecord.amount_of_units;
-        console.log(oldAmount);
+        console.log('The amount of unit for this food in this record is ',oldAmount);
         const stats: StatsDto = new StatsDto();
         const amountDiff: number  = amount - oldAmount;
-        console.log(amountDiff);
+        console.log('Amount difference is now ',amountDiff);
         stats.carbs = food.carbsPerUnit * amountDiff;
         stats.fats = food.fatsPerUnit * amountDiff;
         stats.kcal = food.kcalPerUnit * amountDiff;
@@ -95,12 +99,17 @@ export class UserDailyMealsService {
         let res;
         if(amount === 0)
         {
+            console.log('Amount requested is 0, so i need to delete the record');
             res = await this.mealsRepo.delete({id: recordId});
         }
-        res = await this.mealsRepo.save({id: recordId, amount_of_units: amount});
+        else 
+        {
+            console.log('Amount is not null, so i need to update the record');
+            res = await this.mealsRepo.save({id: recordId, amount_of_units: amount});
+        }
 
         res = await this.statsService.addOrUpdateStats(stats, userId, date);
-        return this.getMealsForUser(userId);
+        return this.getMealsForUser(userId, oldRecord.mealType.name);
     }
 
     async deleteUsersMeal(recordId: number, userId: number, date: string): Promise<any>

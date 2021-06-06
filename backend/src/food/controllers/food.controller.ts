@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Controller } from '@nestjs/common';
 import { Get, Post } from '@nestjs/common/decorators/http/request-mapping.decorator';
-import { Body, Param } from '@nestjs/common/decorators/http/route-params.decorator';
+import { Body, Param, Query } from '@nestjs/common/decorators/http/route-params.decorator';
 import { CreateFoodDto } from '../create-food.dto';
 import { FoodDto } from '../food.dto';
 import { FoodService } from '../services/food.service';
@@ -24,10 +24,10 @@ export class FoodController {
         return this.foodService.findAll();
     }
 
-    @Get('one-like/:name')
-    findOneByName(@Param('name') name: string): Promise<FoodDto>
+    @Get()
+    findManyByName(@Query() query): Promise<FoodDto[]>
     {
-        console.log(name);
-        return this.foodService.findByName(name);
+        console.log(query.name);
+        return this.foodService.findByName(query.name);
     }
 }

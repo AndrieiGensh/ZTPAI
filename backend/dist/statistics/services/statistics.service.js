@@ -26,7 +26,7 @@ let StatisticsService = class StatisticsService {
         this.userService = userService;
     }
     async addOrUpdateStats(newStats, userId, date) {
-        console.log("IN STATS ", newStats, date);
+        console.log("IN STATS ", newStats, date, newStats.date, newStats.date.toISOString());
         const searchStats = await this.statsRepo.createQueryBuilder('s')
             .leftJoinAndSelect('s.user', 'us').where('us.id = :usId', { usId: userId })
             .andWhere('s.date = :MyDate', { MyDate: date }).getOne();
@@ -63,10 +63,9 @@ let StatisticsService = class StatisticsService {
                 {
                     console.log("TYPE IS DAILY");
                     result = await this.statsRepo.createQueryBuilder('s').leftJoin('s.user', 'uid')
-                        .select('s.date', 'date').addSelect('s.kcal', 'kcal').addSelect('s.carbs', 'carbs')
-                        .addSelect('s.proteins', 'proteins').andWhere('s.date >= :MyDate', { MyDate: date })
-                        .andWhere('uid.id = :UID', { UID: userId }).getRawOne();
-                    console.log("SREACH RES IS ", result);
+                        .where('s.date = :MyDate', { MyDate: date })
+                        .andWhere('uid.id = :UID', { UID: userId }).getOne();
+                    console.log("SREACH RES IS ", result, "/", result.date);
                     const testDate = new Date(date);
                     testDate.setDate(testDate.getDate() + 20);
                     console.log("I WONDER ... ", testDate.toISOString());
@@ -79,11 +78,10 @@ let StatisticsService = class StatisticsService {
                     }
                     const testDate = new Date(date);
                     testDate.setDate(testDate.getDate() - days);
-                    console.log("START AT ", testDate);
+                    console.log("START AT ", testDate.toISOString());
                     result = await this.statsRepo.createQueryBuilder('s').leftJoin('s.user', 'uid')
-                        .select('s.date', 'date').addSelect('s.kcal', 'kcal').addSelect('s.carbs', 'carbs')
-                        .addSelect('s.proteins', 'proteins').andWhere('s.date >= :MyDate', { MyDate: testDate })
-                        .andWhere('uid.id = :UID', { UID: userId }).getRawMany();
+                        .where('s.date >= :MyDate', { MyDate: testDate.toISOString() })
+                        .andWhere('uid.id = :UID', { UID: userId }).getMany();
                     console.log("SREACH RES IS ", result);
                 }
                 break;
@@ -91,6 +89,9 @@ let StatisticsService = class StatisticsService {
                 {
                     return null;
                 }
+        }
+        if (result === undefined) {
+            console.log("Ehhhhhhh, undefined?", result);
         }
         return result === undefined ? null : result;
     }

@@ -1,0 +1,52 @@
+<h1 mat-dialog-title>Row Action :: <strong>{{action}}</strong></h1>
+<div mat-dialog-content [ngSwitch]="action">
+  <div *ngSwitchCase="'Delete'">
+    Sure to delete <b>{{local_data.name}}</b>?
+  </div>
+  <div *ngSwitchCase="'Add'">
+
+    <div class="search-area">
+      <mat-form-field appearance="fill">
+        <mat-label>Search Name</mat-label>
+        <input matInput [(ngModel)]="searchName">
+      </mat-form-field>
+
+      <button mat-button class="action-button" [disabled]="searchName==''" (click)="fetchFoodOptions()">Search</button>
+
+    </div>
+
+    <div class="search-message" *ngIf="!fetchedAny">
+      No such food was found. Sorry.
+    </div>
+
+    <mat-form-field>
+      <mat-label>Select your product</mat-label>
+      <mat-select [disabled]="!fetchedAny" [(ngModel)]="selectedFoodInstance" name="food">
+        <mat-option *ngFor="let food of foodInstances" [value]="food">
+          {{food.food_name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div *ngIf="fetchedAny && selectedFoodInstance">
+
+      <div>Units {{selectedFoodInstance.unitName.toUpperCase()}}</div>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Amount of Units</mat-label>
+        <input matInput [(ngModel)]="amountOfUnits">
+      </mat-form-field>
+
+    </div>
+
+  </div>
+  <div *ngSwitchCase="'Update'">
+    <mat-form-field>
+      <input placeholder="{{action}} Units Amount" matInput [(ngModel)]="local_data.amount">
+    </mat-form-field>
+  </div>
+</div>
+<div mat-dialog-actions calss="dialog-actions">
+  <button mat-button class="action-button" (click)="doAction()">{{action}}</button>
+  <button mat-button class="action-button" (click)="closeDialog()" mat-flat-button color="warn">Cancel</button>
+</div>
