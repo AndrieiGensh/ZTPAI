@@ -19,6 +19,7 @@ const common_3 = require("@nestjs/common");
 const common_4 = require("@nestjs/common");
 const common_5 = require("@nestjs/common");
 const jwt_guard_guard_1 = require("../../auth/guards/jwt-guard.guard");
+const authuser_decorator_1 = require("../../auth/decorators/authuser.decorator");
 const local_auth_guard_1 = require("../../auth/guards/local-auth.guard");
 const post_filters_1 = require("../../post/models/post-filters");
 const users_service_1 = require("../services/users.service");
@@ -35,9 +36,23 @@ let UsersController = class UsersController {
         return { access_token: token, expiresIn: '100' };
     }
     async login(user) {
-        console.log("Before login methods");
         const jwt = await this.userService.login(user);
         return { access_token: jwt, expiresIn: '100' };
+    }
+    async getUserInfo(user) {
+        return this.userService.getUserInfo(user.userId);
+    }
+    async changeUserInfo(user, body) {
+        return this.userService.changeUserInfo(user.userId, body.name, body.surname);
+    }
+    async verifyPassword(user, query) {
+        return this.userService.verifyPassword(user.userId, query.password);
+    }
+    async changePassword(user, body) {
+        return this.userService.changePassword(user.userId, body.password);
+    }
+    async deleteAccount(user) {
+        return this.userService.deleteUser(user.userId);
     }
 };
 __decorate([
@@ -62,6 +77,46 @@ __decorate([
     __metadata("design:paramtypes", [user_dto_1.UserDto]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "login", null);
+__decorate([
+    common_4.UseGuards(jwt_guard_guard_1.JwtGuard),
+    common_1.Get('userInfo'),
+    __param(0, authuser_decorator_1.AuthUser()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "getUserInfo", null);
+__decorate([
+    common_4.UseGuards(jwt_guard_guard_1.JwtGuard),
+    common_2.Put('userInfo'),
+    __param(0, authuser_decorator_1.AuthUser()), __param(1, common_3.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "changeUserInfo", null);
+__decorate([
+    common_4.UseGuards(jwt_guard_guard_1.JwtGuard),
+    common_1.Get('password-verification'),
+    __param(0, authuser_decorator_1.AuthUser()), __param(1, common_3.Query()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "verifyPassword", null);
+__decorate([
+    common_4.UseGuards(jwt_guard_guard_1.JwtGuard),
+    common_2.Put('password-change'),
+    __param(0, authuser_decorator_1.AuthUser()), __param(1, common_3.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "changePassword", null);
+__decorate([
+    common_4.UseGuards(jwt_guard_guard_1.JwtGuard),
+    common_2.Delete('delete'),
+    __param(0, authuser_decorator_1.AuthUser()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "deleteAccount", null);
 UsersController = __decorate([
     common_5.Controller('users'),
     __metadata("design:paramtypes", [users_service_1.UsersService])

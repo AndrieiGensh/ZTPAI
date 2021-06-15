@@ -9,9 +9,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserDto = void 0;
+exports.UserDto = exports.UserRoles = void 0;
 const class_validator_1 = require("class-validator");
 const user_info_dto_1 = require("../user-info/user-info.dto");
+var UserRoles;
+(function (UserRoles) {
+    UserRoles["ADMIN"] = "admin";
+    UserRoles["USER"] = "user";
+    UserRoles["EDITOR"] = "editor";
+})(UserRoles = exports.UserRoles || (exports.UserRoles = {}));
 class UserDto {
 }
 __decorate([

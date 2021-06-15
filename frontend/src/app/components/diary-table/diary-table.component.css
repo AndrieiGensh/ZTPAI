@@ -5,6 +5,7 @@ table{
     align-items: center;
     justify-content: center;
     margin: 0 0 2rem 0;
+    background-color:  #bf2162;
 }
 
 .mat-column-amount, .mat-column-foodName, .mat-column-MUName, .mat-column-actions

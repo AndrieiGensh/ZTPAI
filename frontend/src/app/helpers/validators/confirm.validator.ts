@@ -9,9 +9,7 @@ export function ConfirmedValidator(controlName: string, matchingControlName: str
         }
         if (control.value !== matchingControl.value) {
             matchingControl.setErrors({ confirmedValidator: true });
-            console.log("NOT MATCHING");
         } else {
-            console.log("MATCHING");
             matchingControl.setErrors(null);
         }
     }

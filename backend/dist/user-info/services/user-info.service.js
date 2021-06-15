@@ -27,6 +27,14 @@ let UserInfoService = class UserInfoService {
     findAll() {
         return this.userinfoRepo.find({ relations: ["namesurname", "sex", "lifestyle"] });
     }
+    findEquivalent(lifestyle, sex, name, surname) {
+        return this.userinfoRepo.createQueryBuilder('ui')
+            .leftJoin('ui.sex', 'sex').leftJoin('ui.lifestyle', 'lifestyle')
+            .leftJoin('ui.namesurname', 'namesurname')
+            .where('sex.name = :sex', { sex: sex }).andWhere('lifestyle.name = :lifestyle', { lifestyle: lifestyle })
+            .andWhere('namesurname.name = :name', { name: name }).andWhere('namesurname.surname', { surname: surname })
+            .getOne();
+    }
 };
 UserInfoService = __decorate([
     common_1.Injectable(),

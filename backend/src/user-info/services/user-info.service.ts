@@ -21,4 +21,14 @@ export class UserInfoService {
     {
         return this.userinfoRepo.find({relations: ["namesurname", "sex", "lifestyle"]});
     }
+
+    findEquivalent(lifestyle: string, sex: string, name: string, surname:string): Promise<UserInfoDto>
+    {
+        return this.userinfoRepo.createQueryBuilder('ui')
+        .leftJoin('ui.sex', 'sex').leftJoin('ui.lifestyle', 'lifestyle')
+        .leftJoin('ui.namesurname', 'namesurname')
+        .where('sex.name = :sex', {sex: sex}).andWhere('lifestyle.name = :lifestyle', {lifestyle: lifestyle})
+        .andWhere('namesurname.name = :name', {name: name}).andWhere('namesurname.surname', {surname: surname})
+        .getOne();
+    }
 }

@@ -39,7 +39,7 @@ __decorate([
     __metadata("design:type", Number)
 ], StatisticsEntity.prototype, "proteins", void 0);
 __decorate([
-    typeorm_1.ManyToOne(() => users_entity_1.UserEntity, (user) => user.stats),
+    typeorm_1.ManyToOne(() => users_entity_1.UserEntity, (user) => user.stats, { onDelete: 'CASCADE' }),
     __metadata("design:type", users_entity_1.UserEntity)
 ], StatisticsEntity.prototype, "user", void 0);
 StatisticsEntity = __decorate([

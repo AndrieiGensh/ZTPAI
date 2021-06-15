@@ -27,7 +27,7 @@ __decorate([
     __metadata("design:type", String)
 ], SettingsEntity.prototype, "description", void 0);
 __decorate([
-    typeorm_1.ManyToMany(() => users_entity_1.UserEntity, (user) => user.settings),
+    typeorm_1.ManyToMany(() => users_entity_1.UserEntity, (user) => user.settings, { onDelete: 'CASCADE' }),
     __metadata("design:type", Array)
 ], SettingsEntity.prototype, "users", void 0);
 SettingsEntity = __decorate([

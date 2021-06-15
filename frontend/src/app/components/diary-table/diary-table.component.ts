@@ -35,16 +35,6 @@ export class DiaryTableComponent implements OnInit {
     this.dataSource.getTableRows(this.tableType);
   }
 
-  onTableRowClick(tableRecord: DiaryTableRecord)
-  {
-    console.log("After clicking on this row, this is what beeing selected", tableRecord);
-  }
-
-  onEditClick(tableRecord: DiaryTableRecord)
-  {
-    console.log("After clicking on the edit button i got", tableRecord)
-  }
-
   openDialog(action: any,obj: any) {
     obj.action = action;
     const dialogRef = this.dialog.open(DialogBoxComponent, {
@@ -66,13 +56,9 @@ export class DiaryTableComponent implements OnInit {
   async addNewMeal(data: any)
   {
     const date = moment().format("YYYY-MM-DD");
-    console.log("The date in the angular is ", date);
-    console.log("The date in the add method is ", date);
     await this.diaryService.addToList(data.food_name, this.tableType, data.amount, date)
     .subscribe( result =>{
-      console.log("It seems, the add method was a success. It returns in subscribe: ", result);
       this.dataSource.getTableRows(this.tableType);
-      console.log("Now i forced my datasource to re-get the table rows for the table. Need to check the result");
     });
   }
 
@@ -80,29 +66,19 @@ export class DiaryTableComponent implements OnInit {
   async updateMeal(data: DiaryTableRecord)
   {
     const date = moment().format("YYYY-MM-DD");
-    console.log("The date in the angular is ", date);
-    console.log("The date in the update method is ", date);
     await this.diaryService.updateListElement(data.recordId, data.amount, date)
     .subscribe( result =>{
-      console.log("It seems, the update method was a success. It returns in subscribe: ", result);
       this.dataSource.getTableRows(this.tableType);
-      console.log("Now i forced my datasource to re-get the table rows for the table. Need to check the result");
     });
-    console.log("The element is updated!");
   }
 
   async deleteMeal(data: DiaryTableRecord)
   {
     const date = moment().format("YYYY-MM-DD");
-    console.log("The date in the angular is ", date);
-    console.log("The date in the delete method is ", date);
     await this.diaryService.deleteFromList(data.recordId, date)
     .subscribe( result =>{
-      console.log("It seems, the delete method was a success. It returns in subscribe: ", result);
       this.dataSource.getTableRows(this.tableType);
-      console.log("Now i forced my datasource to re-get the table rows for the table. Need to check the result");
     });
-    console.log('The element is deleted');
   }
 
 }

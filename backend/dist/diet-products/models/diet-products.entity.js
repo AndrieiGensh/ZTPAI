@@ -24,11 +24,11 @@ __decorate([
     __metadata("design:type", Boolean)
 ], DietProductsEntity.prototype, "status", void 0);
 __decorate([
-    typeorm_1.ManyToOne(() => food_entity_1.FoodEntity, (food) => food.dietProducts),
+    typeorm_1.ManyToOne(() => food_entity_1.FoodEntity, (food) => food.dietProducts, { onDelete: 'CASCADE' }),
     __metadata("design:type", food_entity_1.FoodEntity)
 ], DietProductsEntity.prototype, "food", void 0);
 __decorate([
-    typeorm_1.ManyToOne(() => diets_entity_1.DietsEntity, (diet) => diet.dietProducts),
+    typeorm_1.ManyToOne(() => diets_entity_1.DietsEntity, (diet) => diet.dietProducts, { onDelete: 'CASCADE' }),
     __metadata("design:type", diets_entity_1.DietsEntity)
 ], DietProductsEntity.prototype, "diet", void 0);
 DietProductsEntity = __decorate([

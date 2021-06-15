@@ -8,5 +8,6 @@ import { UserInfoService } from './services/user-info.service';
   imports: [TypeOrmModule.forFeature([UserInfoEntity])],
   controllers: [UserInfoController],
   providers: [UserInfoService],
+  exports: [UserInfoService]
 })
 export class UserInfoModule {}

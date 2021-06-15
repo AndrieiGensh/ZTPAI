@@ -19,12 +19,9 @@ export class FoodService {
     
     async create(food: FoodDto) : Promise<CreateFoodDto>
     {
-        console.log("IN THE FOOD SERVICE I GOT ", food);
         let measureUnit: MeasureUnitsDto = await this.muService.getByName(food.measurementName);
-        console.log("THE MEASURE UNIT IS ", measureUnit);
         if(measureUnit === undefined)
         {
-            console.log("NO MATCH FOR UNIT! CREATING A NEW ONE");
             const newUnit : CreateMeasureUnitsDto = new CreateMeasureUnitsDto();
             newUnit.name = food.measurementName;
 
@@ -37,7 +34,6 @@ export class FoodService {
         newFood.measureUnits = measureUnit;
         newFood.name = food.name;
         newFood.proteinsPerUnit = food.proteinsPerUnit;
-        console.log("BEFORE SAVING FOOD IS ", newFood);
         return this.foodRepo.save(newFood);
     }
 

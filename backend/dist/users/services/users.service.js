@@ -16,13 +16,19 @@ exports.UsersService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const auth_service_1 = require("../../auth/services/auth.service");
+const name_surname_service_1 = require("../../name-surname/services/name-surname.service");
+const user_info_service_1 = require("../../user-info/services/user-info.service");
 const typeorm_2 = require("typeorm");
 const users_entity_1 = require("../models/users.entity");
 const user_dto_1 = require("../user.dto");
+const name_surname_dto_1 = require("../../name-surname/name-surname.dto");
+const user_info_dto_1 = require("../../user-info/user-info.dto");
 let UsersService = class UsersService {
-    constructor(userRepo, authService) {
+    constructor(userRepo, authService, namesurnameService, userInfoService) {
         this.userRepo = userRepo;
         this.authService = authService;
+        this.namesurnameService = namesurnameService;
+        this.userInfoService = userInfoService;
     }
     async create(user) {
         const hashedPass = await this.authService.hashPassword(user.password);
@@ -43,20 +49,18 @@ let UsersService = class UsersService {
             getMany();
     }
     async login(user) {
-        console.log("Inside login");
         const validationRes = await this.validateUser(user.email, user.password);
-        console.log("AfterValidation");
         return await this.authService.generateJWT(validationRes);
     }
     async validateUser(email, password) {
         const user = await this.findByEmail(email);
-        console.log(user.email);
+        if (user === undefined) {
+            throw new Error("No user with such email");
+        }
         const result = await this.authService.comparePasswords(password, user.password);
         if (result) {
-            console.log("match");
             return user;
         }
-        console.log("No match");
         throw new Error("No match for user credentials");
     }
     async findByEmail(email) {
@@ -76,12 +80,53 @@ let UsersService = class UsersService {
             where('u.id = :UID', { UID: id }).
             getOne();
     }
+    async getUserInfo(userId) {
+        return this.userRepo.createQueryBuilder('u')
+            .leftJoin('u.userInfo', 'usIn').leftJoin('usIn.namesurname', 'NameSurname')
+            .addSelect('NameSurname.name', 'name').addSelect('NameSurname.surname', 'surname')
+            .where('u.id = :UserId', { UserId: userId })
+            .getRawOne();
+    }
+    async changeUserInfo(userId, name, surname) {
+        const user = await this.findById(userId);
+        let userInfo;
+        const newUserInfo = new user_info_dto_1.UserInfoDto();
+        let newNameSurname = new name_surname_dto_1.NameSurnameDto();
+        newNameSurname.name = name;
+        newNameSurname.surname = surname;
+        newNameSurname = await this.namesurnameService.create(newNameSurname);
+        newUserInfo.namesurname = newNameSurname;
+        newUserInfo.age = 50;
+        userInfo = await this.userInfoService.create(newUserInfo);
+        user.userInfo = userInfo;
+        const result = await this.userRepo.save(user);
+        return result !== undefined;
+    }
+    async verifyPassword(userId, password) {
+        const user = await this.userRepo.createQueryBuilder('u')
+            .addSelect('u.password').where('u.id = :UserId', { UserId: userId }).getOne();
+        const result = await this.authService.comparePasswords(password, user.password);
+        return result;
+    }
+    async changePassword(userId, password) {
+        const user = await this.findById(userId);
+        const newHashedPassword = await this.authService.hashPassword(password);
+        user.password = newHashedPassword;
+        const result = await this.userRepo.update({ id: userId }, user);
+        return result !== undefined;
+    }
+    async deleteUser(userId) {
+        const result = await this.userRepo.delete({ id: userId });
+        return result !== undefined;
+    }
 };
 UsersService = __decorate([
     common_1.Injectable(),
     __param(0, typeorm_1.InjectRepository(users_entity_1.UserEntity)),
     __metadata("design:paramtypes", [typeorm_2.Repository,
-        auth_service_1.AuthService])
+        auth_service_1.AuthService,
+        name_surname_service_1.NameSurnameService,
+        user_info_service_1.UserInfoService])
 ], UsersService);
 exports.UsersService = UsersService;
 //# sourceMappingURL=users.service.js.map

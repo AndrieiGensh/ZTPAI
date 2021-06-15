@@ -12,11 +12,14 @@ const typeorm_1 = require("@nestjs/typeorm");
 const measure_units_controller_1 = require("./controllers/measure-units.controller");
 const measure_units_entity_1 = require("./models/measure-units.entity");
 const measure_units_service_1 = require("./services/measure-units.service");
+const users_module_1 = require("../users/users.module");
 let MeasureUnitsModule = class MeasureUnitsModule {
 };
 MeasureUnitsModule = __decorate([
     common_1.Module({
-        imports: [typeorm_1.TypeOrmModule.forFeature([measure_units_entity_1.MeasureUnitsEntity])],
+        imports: [typeorm_1.TypeOrmModule.forFeature([measure_units_entity_1.MeasureUnitsEntity]),
+            common_1.forwardRef(() => users_module_1.UsersModule),
+        ],
         controllers: [measure_units_controller_1.MeasureUnitsController],
         providers: [measure_units_service_1.MeasureUnitsService],
         exports: [measure_units_service_1.MeasureUnitsService]

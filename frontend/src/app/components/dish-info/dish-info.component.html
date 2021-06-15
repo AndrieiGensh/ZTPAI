@@ -1,6 +1,9 @@
 <section class="charts">
+    <div class="title">
+            TimeLine Chart
+    </div>
     <div class="timeline-charts">
-        <ngx-charts-line-chart
+        <ngx-charts-area-chart
         [results]="InitTimeLineData"
         [showGridLines]="true"
         [legend]="true"
@@ -11,17 +14,21 @@
         [yAxisLabel]="yAxisLabel"
         >
 
-        </ngx-charts-line-chart>
+        </ngx-charts-area-chart>
         
     </div>
 
+    <div class="title">
+            Daily Chart
+    </div>
+
     <div class="daily-charts">
-        <ngx-charts-pie-chart
+        <ngx-charts-advanced-pie-chart
         [results]="InitDailyData"
-        [legend]="true"
+        
         [scheme]="scheme"
         >
 
-        </ngx-charts-pie-chart>
+        </ngx-charts-advanced-pie-chart>
     </div>
 </section>

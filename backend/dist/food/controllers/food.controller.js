@@ -18,23 +18,27 @@ const request_mapping_decorator_1 = require("@nestjs/common/decorators/http/requ
 const route_params_decorator_1 = require("@nestjs/common/decorators/http/route-params.decorator");
 const food_dto_1 = require("../food.dto");
 const food_service_1 = require("../services/food.service");
+const authuser_decorator_1 = require("../../auth/decorators/authuser.decorator");
+const jwt_guard_guard_1 = require("../../auth/guards/jwt-guard.guard");
+const roles_guard_1 = require("../../auth/guards/roles.guard");
+const roles_decorator_1 = require("../../auth/decorators/roles.decorator");
 let FoodController = class FoodController {
     constructor(foodService) {
         this.foodService = foodService;
     }
     create(food) {
-        console.log(food);
         return this.foodService.create(food);
     }
     async findAll() {
         return this.foodService.findAll();
     }
     findManyByName(query) {
-        console.log(query.name);
         return this.foodService.findByName(query.name);
     }
 };
 __decorate([
+    common_1.UseGuards(jwt_guard_guard_1.JwtGuard, roles_guard_1.RolesGuard),
+    roles_decorator_1.hasRoles('admin'),
     request_mapping_decorator_1.Post('new'),
     __param(0, route_params_decorator_1.Body()),
     __metadata("design:type", Function),
@@ -42,12 +46,16 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], FoodController.prototype, "create", null);
 __decorate([
+    common_1.UseGuards(jwt_guard_guard_1.JwtGuard, roles_guard_1.RolesGuard),
+    roles_decorator_1.hasRoles('user'),
     request_mapping_decorator_1.Get('all'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], FoodController.prototype, "findAll", null);
 __decorate([
+    common_1.UseGuards(jwt_guard_guard_1.JwtGuard, roles_guard_1.RolesGuard),
+    roles_decorator_1.hasRoles('user'),
     request_mapping_decorator_1.Get(),
     __param(0, route_params_decorator_1.Query()),
     __metadata("design:type", Function),

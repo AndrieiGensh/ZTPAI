@@ -46,7 +46,6 @@ export class PostService {
     async createPost(userId: number, title: string, content: string, photoPath: string, hashtags: string, date: string) : Promise<CreatePostDto>
     {
         const user = await this.userService.findById(userId);
-        console.log("The user is ", user);
         const post: CreatePostDto = new CreatePostDto;
         post.title = title;
         post.content = content;
@@ -56,7 +55,6 @@ export class PostService {
         post.hashtags = hashtags;
         post.user = user;
         post.date = new Date(date);
-        console.log("We are about to save this post instance ", post)
 
         return this.postRepo.save(post);
     }

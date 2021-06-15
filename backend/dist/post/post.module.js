@@ -23,6 +23,7 @@ PostModule = __decorate([
         ],
         controllers: [post_controller_1.PostController],
         providers: [post_service_1.PostService],
+        exports: [post_service_1.PostService]
     })
 ], PostModule);
 exports.PostModule = PostModule;

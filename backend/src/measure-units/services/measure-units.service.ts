@@ -21,7 +21,6 @@ export class MeasureUnitsService
 
     async getByName(name: string): Promise<MeasureUnitsDto | null>
     {
-        console.log("THE NAME OF UNIT TO SEARCH FOR IS ", name);
         return await this.muRepo.createQueryBuilder('mu')
         .addSelect('mu.id').addSelect('mu.name').where('mu.name = :muName', {muName: name})
         .getOne();

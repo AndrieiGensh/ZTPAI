@@ -2,21 +2,24 @@
 import { Body, Controller, Get, Param, Res, Post, UploadedFile, UseGuards, UseInterceptors, Query, Put } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
-import { JwtGuard } from 'src/auth/guards/jwt-guard.guard';
 import { CreatePostDto } from '../create-post.dto';
 import { GetPostDto } from '../get-post.dto';
 import { PostService } from '../services/post.service';
-import { AuthUser } from 'src/auth/decorators/authuser.decorator';
 import path = require("path");
 import { join } from "path";
 import { v4 as uuidv4 } from 'uuid';
+import { AuthUser } from 'src/auth/decorators/authuser.decorator';
+import { JwtGuard } from 'src/auth/guards/jwt-guard.guard';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { hasRoles } from 'src/auth/decorators/roles.decorator';
 
 @Controller('posts')
 export class PostController {
     constructor(private postService: PostService)
     {}
 
-    @UseGuards(JwtGuard)
+    @UseGuards(JwtGuard, RolesGuard)
+    @hasRoles('user')
     @Post('/create-post')
     @UseInterceptors(
         FileInterceptor('image', {
@@ -26,9 +29,7 @@ export class PostController {
                 },
                 filename: (req, file, cb) => {
                     const filename : string = path.parse(file.originalname).name.replace(/\s/g, '') + uuidv4();
-                    console.log('File name now = ', filename);
                     const extension = path.parse(file.originalname).ext;
-                    console.log('Extension = ', extension);
                     cb(null, filename + '-' + extension);
                 }
             }),
@@ -36,41 +37,41 @@ export class PostController {
     )
     async create(@UploadedFile() image, @AuthUser() user, @Body() body) : Promise<CreatePostDto>
     {
-        console.log("About to begin creating new post");
         return this.postService.createPost(user.userId, body.title, body.content, image.filename, body.hashtags, body.date);
     }
 
-    @UseGuards(JwtGuard)
+    @UseGuards(JwtGuard, RolesGuard)
+    @hasRoles('user')
     @Get('/rated')
     async getNMostRatedPosts(@Query() query) : Promise<GetPostDto[]>
     {
         return this.postService.getNMostPopularPosts(query.n);
     }
 
-    @UseGuards(JwtGuard)
+    @UseGuards(JwtGuard, RolesGuard)
+    @hasRoles('user')
     @Get('/get-post-by-id/:id')
     async getPostById(@Param('id') id: string) : Promise<GetPostDto>
     {
-        console.log("I am in getPostById and id = ", id);
         return this.postService.getPostById(id);
     }
 
-    @UseGuards(JwtGuard)
+    @UseGuards(JwtGuard, RolesGuard)
+    @hasRoles('user')
     @Get('/post')
     async getPostImage(@Query() query, @Res() res): Promise<Object>
     {
-        console.log(query);
         const post = await this.postService.getPostById(query.postId.toString());
         if(post === undefined)
         {
             return Error("No such post for a given Id");
         }
-        console.log("Founf the post ", post);
         const imagePath = post.photoPath;
         return res.sendFile(join(process.cwd(), 'src/uploads/' + imagePath));
     }
 
-    @UseGuards(JwtGuard)
+    @UseGuards(JwtGuard, RolesGuard)
+    @hasRoles('user')
     @Put()
     async updateLikesDislikes(@Body() body): Promise<number[]>
     {

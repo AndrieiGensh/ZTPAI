@@ -21,15 +21,15 @@ __decorate([
     __metadata("design:type", Number)
 ], UserDailyMealsEntity.prototype, "id", void 0);
 __decorate([
-    typeorm_1.ManyToOne(() => users_entity_1.UserEntity, (user) => user.userDailyMeals),
+    typeorm_1.ManyToOne(() => users_entity_1.UserEntity, (user) => user.userDailyMeals, { onDelete: 'CASCADE' }),
     __metadata("design:type", users_entity_1.UserEntity)
 ], UserDailyMealsEntity.prototype, "user", void 0);
 __decorate([
-    typeorm_1.ManyToOne(() => food_entity_1.FoodEntity, (meal) => meal.userDailyMeals),
+    typeorm_1.ManyToOne(() => food_entity_1.FoodEntity, (meal) => meal.userDailyMeals, { onDelete: 'CASCADE' }),
     __metadata("design:type", food_entity_1.FoodEntity)
 ], UserDailyMealsEntity.prototype, "meal", void 0);
 __decorate([
-    typeorm_1.ManyToOne(() => meal_types_entity_1.MealTypesEntity, (mealType) => mealType.userDailyMeals),
+    typeorm_1.ManyToOne(() => meal_types_entity_1.MealTypesEntity, (mealType) => mealType.userDailyMeals, { onDelete: 'CASCADE' }),
     __metadata("design:type", meal_types_entity_1.MealTypesEntity)
 ], UserDailyMealsEntity.prototype, "mealType", void 0);
 __decorate([

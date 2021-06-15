@@ -14,32 +14,51 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CommentController = void 0;
 const common_1 = require("@nestjs/common");
-const comment_dto_1 = require("../comment.dto");
+const jwt_guard_guard_1 = require("../../auth/guards/jwt-guard.guard");
+const authuser_decorator_1 = require("../../auth/decorators/authuser.decorator");
+const roles_guard_1 = require("../../auth/guards/roles.guard");
+const roles_decorator_1 = require("../../auth/decorators/roles.decorator");
 const comment_service_1 = require("../services/comment.service");
 let CommentController = class CommentController {
     constructor(commentService) {
         this.commentService = commentService;
     }
-    create(comment) {
-        return this.commentService.create(comment);
+    async addComment(user, body) {
+        await this.commentService.addComment(user.userId, body.postId, body.content, body.date);
     }
     async findAll() {
         return this.commentService.findAll();
     }
+    async getCommentsForPost(user, query) {
+        return this.commentService.getCommentsForPost(query.postId);
+    }
 };
 __decorate([
-    common_1.Post(),
-    __param(0, common_1.Body()),
+    common_1.UseGuards(jwt_guard_guard_1.JwtGuard, roles_guard_1.RolesGuard),
+    roles_decorator_1.hasRoles('user'),
+    common_1.Post('/new-comment'),
+    __param(0, authuser_decorator_1.AuthUser()), __param(1, common_1.Body()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [comment_dto_1.CommentDto]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
-], CommentController.prototype, "create", null);
+], CommentController.prototype, "addComment", null);
 __decorate([
+    common_1.UseGuards(jwt_guard_guard_1.JwtGuard, roles_guard_1.RolesGuard),
+    roles_decorator_1.hasRoles('admin'),
     common_1.Get(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], CommentController.prototype, "findAll", null);
+__decorate([
+    common_1.UseGuards(jwt_guard_guard_1.JwtGuard, roles_guard_1.RolesGuard),
+    roles_decorator_1.hasRoles('user'),
+    common_1.Get('/post-comments'),
+    __param(0, authuser_decorator_1.AuthUser()), __param(1, common_1.Query()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], CommentController.prototype, "getCommentsForPost", null);
 CommentController = __decorate([
     common_1.Controller('comment'),
     __metadata("design:paramtypes", [comment_service_1.CommentService])

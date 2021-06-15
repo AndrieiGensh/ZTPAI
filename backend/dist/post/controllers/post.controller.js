@@ -16,34 +16,32 @@ exports.PostController = void 0;
 const common_1 = require("@nestjs/common");
 const platform_express_1 = require("@nestjs/platform-express");
 const multer_1 = require("multer");
-const jwt_guard_guard_1 = require("../../auth/guards/jwt-guard.guard");
 const post_service_1 = require("../services/post.service");
-const authuser_decorator_1 = require("../../auth/decorators/authuser.decorator");
 const path = require("path");
 const path_1 = require("path");
 const uuid_1 = require("uuid");
+const authuser_decorator_1 = require("../../auth/decorators/authuser.decorator");
+const jwt_guard_guard_1 = require("../../auth/guards/jwt-guard.guard");
+const roles_guard_1 = require("../../auth/guards/roles.guard");
+const roles_decorator_1 = require("../../auth/decorators/roles.decorator");
 let PostController = class PostController {
     constructor(postService) {
         this.postService = postService;
     }
     async create(image, user, body) {
-        console.log("About to begin creating new post");
         return this.postService.createPost(user.userId, body.title, body.content, image.filename, body.hashtags, body.date);
     }
     async getNMostRatedPosts(query) {
         return this.postService.getNMostPopularPosts(query.n);
     }
     async getPostById(id) {
-        console.log("I am in getPostById and id = ", id);
         return this.postService.getPostById(id);
     }
     async getPostImage(query, res) {
-        console.log(query);
         const post = await this.postService.getPostById(query.postId.toString());
         if (post === undefined) {
             return Error("No such post for a given Id");
         }
-        console.log("Founf the post ", post);
         const imagePath = post.photoPath;
         return res.sendFile(path_1.join(process.cwd(), 'src/uploads/' + imagePath));
     }
@@ -52,7 +50,8 @@ let PostController = class PostController {
     }
 };
 __decorate([
-    common_1.UseGuards(jwt_guard_guard_1.JwtGuard),
+    common_1.UseGuards(jwt_guard_guard_1.JwtGuard, roles_guard_1.RolesGuard),
+    roles_decorator_1.hasRoles('user'),
     common_1.Post('/create-post'),
     common_1.UseInterceptors(platform_express_1.FileInterceptor('image', {
         storage: multer_1.diskStorage({
@@ -61,9 +60,7 @@ __decorate([
             },
             filename: (req, file, cb) => {
                 const filename = path.parse(file.originalname).name.replace(/\s/g, '') + uuid_1.v4();
-                console.log('File name now = ', filename);
                 const extension = path.parse(file.originalname).ext;
-                console.log('Extension = ', extension);
                 cb(null, filename + '-' + extension);
             }
         }),
@@ -74,7 +71,8 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], PostController.prototype, "create", null);
 __decorate([
-    common_1.UseGuards(jwt_guard_guard_1.JwtGuard),
+    common_1.UseGuards(jwt_guard_guard_1.JwtGuard, roles_guard_1.RolesGuard),
+    roles_decorator_1.hasRoles('user'),
     common_1.Get('/rated'),
     __param(0, common_1.Query()),
     __metadata("design:type", Function),
@@ -82,7 +80,8 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], PostController.prototype, "getNMostRatedPosts", null);
 __decorate([
-    common_1.UseGuards(jwt_guard_guard_1.JwtGuard),
+    common_1.UseGuards(jwt_guard_guard_1.JwtGuard, roles_guard_1.RolesGuard),
+    roles_decorator_1.hasRoles('user'),
     common_1.Get('/get-post-by-id/:id'),
     __param(0, common_1.Param('id')),
     __metadata("design:type", Function),
@@ -90,7 +89,8 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], PostController.prototype, "getPostById", null);
 __decorate([
-    common_1.UseGuards(jwt_guard_guard_1.JwtGuard),
+    common_1.UseGuards(jwt_guard_guard_1.JwtGuard, roles_guard_1.RolesGuard),
+    roles_decorator_1.hasRoles('user'),
     common_1.Get('/post'),
     __param(0, common_1.Query()), __param(1, common_1.Res()),
     __metadata("design:type", Function),
@@ -98,7 +98,8 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], PostController.prototype, "getPostImage", null);
 __decorate([
-    common_1.UseGuards(jwt_guard_guard_1.JwtGuard),
+    common_1.UseGuards(jwt_guard_guard_1.JwtGuard, roles_guard_1.RolesGuard),
+    roles_decorator_1.hasRoles('user'),
     common_1.Put(),
     __param(0, common_1.Body()),
     __metadata("design:type", Function),

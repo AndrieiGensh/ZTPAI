@@ -12,9 +12,11 @@ export class DietProductsEntity {
   @Column({ unique: true })
   status: boolean;
 
-  @ManyToOne(() => FoodEntity, (food : FoodEntity) => food.dietProducts)
+  @ManyToOne(() => FoodEntity, (food : FoodEntity) => food.dietProducts,
+  { onDelete: 'CASCADE' })
   food: FoodEntity;
 
-  @ManyToOne(() => DietsEntity, (diet : DietsEntity) => diet.dietProducts)
+  @ManyToOne(() => DietsEntity, (diet : DietsEntity) => diet.dietProducts,
+  { onDelete: 'CASCADE' })
   diet: DietsEntity;
 }

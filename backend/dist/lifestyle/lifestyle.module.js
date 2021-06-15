@@ -12,11 +12,14 @@ const typeorm_1 = require("@nestjs/typeorm");
 const lifestyle_controller_1 = require("./controllers/lifestyle.controller");
 const lifestyle_entity_1 = require("./models/lifestyle.entity");
 const lifestyle_service_1 = require("./services/lifestyle.service");
+const users_module_1 = require("../users/users.module");
 let LifestyleModule = class LifestyleModule {
 };
 LifestyleModule = __decorate([
     common_1.Module({
-        imports: [typeorm_1.TypeOrmModule.forFeature([lifestyle_entity_1.LifestyleEntity])],
+        imports: [typeorm_1.TypeOrmModule.forFeature([lifestyle_entity_1.LifestyleEntity]),
+            common_1.forwardRef(() => users_module_1.UsersModule),
+        ],
         controllers: [lifestyle_controller_1.LifestyleController],
         providers: [lifestyle_service_1.LifestyleService],
     })

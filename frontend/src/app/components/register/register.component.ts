@@ -36,10 +36,8 @@ export class RegisterComponent implements OnInit {
   {
     if(f.get('password')?.value === f.get('confirmPassword')?.value)
     {
-      console.log(f.get('password')?.value," MATCH ", f.get('confirmPassword')?.value);
       return null;
     }
-    console.log(f.get('password')?.value," MISMATCH ", f.get('confirmPassword')?.value);
     return {mismatch: true};
   }
 
@@ -57,7 +55,6 @@ export class RegisterComponent implements OnInit {
     this.loginService.requestRegister(registerInfo.email, registerInfo.password)
     .subscribe({
       next: data =>{
-        console.log(data);
         this.loginService.setSession(data);
         this.router.navigate(['/user/diary']);
       },

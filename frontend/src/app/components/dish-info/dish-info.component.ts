@@ -13,7 +13,7 @@ export class DishInfoComponent implements OnInit {
   constructor(private readonly statsService: StatsService) { }
 
   legPos: any = "below";
-  scheme: any = {domain: ["#f51720", "#fa26a0", "#f8d210", "#2ff3e0"]};
+  scheme: any = {domain: ["#3a86ff", "#fb5607", "#ff006e", "#8338ec"]};
   showXAxis = true;
   showYAxis = true;
   xAxisLabel = "Date";
@@ -36,23 +36,19 @@ export class DishInfoComponent implements OnInit {
       case "single":
       {
         let categories = Object.keys(input);
-        console.log(categories);
         for(let category of categories)
         {
           if(category === "date" || category === "id")
           {
             continue;
           }
-          console.log(category);
           lines.push({"name": category, "value": input[category]});
         }
-        console.log(lines);
       }
       break;
       case "series":
       {
         let linesNames = Object.keys(input[0]);
-        console.log(linesNames);
         for(let name of linesNames)
         {
           if(name === "date" || name === "id")
@@ -61,10 +57,8 @@ export class DishInfoComponent implements OnInit {
           }
           lines.push({"name": name, "series": []});
         }
-        console.log(lines);
         for(let obj of input)
         {
-          console.log("OBJECT", obj);
           let fields: string[] = Object.keys(obj);
           for(let field of fields)
           {
@@ -82,12 +76,11 @@ export class DishInfoComponent implements OnInit {
             }
           }
         }
-        console.log(lines);
       }
       break;
       default:
       {
-        // It is an error :)
+        // It is an error :) Not really possible to get here
       }
     }
     return lines;
@@ -98,8 +91,7 @@ export class DishInfoComponent implements OnInit {
     await this.statsService.requestStatsInitData("daily", 10, date)
       .subscribe({
         next: data =>{
-          console.log(data);
-          this.InitDailyData = this.InitDailyData = this.transformData(data, "single");
+          this.InitDailyData = this.transformData(data, "single");
         },
         error: error=>{
           console.log("There was an error", error);
@@ -112,7 +104,6 @@ export class DishInfoComponent implements OnInit {
     await this.statsService.requestStatsInitData("timeline", 10, date)
       .subscribe({
         next: data =>{
-          console.log(data);
           this.InitTimeLineData = this.transformData(data, "series");
         },
         error: error=>{

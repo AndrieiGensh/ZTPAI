@@ -9,13 +9,16 @@ export class UserDailyMealsEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ManyToOne(() => UserEntity, (user : UserEntity) => user.userDailyMeals)
+    @ManyToOne(() => UserEntity, (user : UserEntity) => user.userDailyMeals,
+    { onDelete: 'CASCADE' })
     user: UserEntity;
 
-    @ManyToOne(() => FoodEntity, (meal: FoodEntity) => meal.userDailyMeals)
+    @ManyToOne(() => FoodEntity, (meal: FoodEntity) => meal.userDailyMeals,
+    { onDelete: 'CASCADE' })
     meal: FoodEntity;
 
-    @ManyToOne(() => MealTypesEntity, (mealType : MealTypesEntity) => mealType.userDailyMeals)
+    @ManyToOne(() => MealTypesEntity, (mealType : MealTypesEntity) => mealType.userDailyMeals,
+    { onDelete: 'CASCADE' })
     mealType: MealTypesEntity;
 
     @Column({type: 'float'})

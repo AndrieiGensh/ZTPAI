@@ -8,5 +8,6 @@ import { SexService } from './services/sex.service';
   imports: [TypeOrmModule.forFeature([SexEntity])],
   controllers: [SexController],
   providers: [SexService],
+  exports: [SexService]
 })
 export class SexModule {}

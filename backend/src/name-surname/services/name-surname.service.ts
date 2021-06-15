@@ -19,4 +19,12 @@ export class NameSurnameService {
     {
         return this.namesurnameRepo.find();
     }
+
+    async findByNameSurnameCombination(name: string, surname: string): Promise<NameSurnameDto>
+    {
+        return this.namesurnameRepo.createQueryBuilder('ns')
+        .where('ns.name = :name', {name: name})
+        .andWhere('ns.surname = :surname', {surname: surname})
+        .getOne();
+    }
 }

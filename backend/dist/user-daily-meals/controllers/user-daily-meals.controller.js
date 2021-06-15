@@ -17,13 +17,13 @@ const common_1 = require("@nestjs/common");
 const authuser_decorator_1 = require("../../auth/decorators/authuser.decorator");
 const jwt_guard_guard_1 = require("../../auth/guards/jwt-guard.guard");
 const user_daily_meals_service_1 = require("../services/user-daily-meals.service");
+const roles_guard_1 = require("../../auth/guards/roles.guard");
+const roles_decorator_1 = require("../../auth/decorators/roles.decorator");
 let UserDailyMealsController = class UserDailyMealsController {
     constructor(userMealsService) {
         this.userMealsService = userMealsService;
     }
     async getDataForUser(user, query) {
-        console.log(user);
-        console.log("The query is ", query, query.mealType);
         return this.userMealsService.getMealsForUser(user.userId, query.mealType);
     }
     async addNewMealForUser(user, body) {
@@ -37,7 +37,8 @@ let UserDailyMealsController = class UserDailyMealsController {
     }
 };
 __decorate([
-    common_1.UseGuards(jwt_guard_guard_1.JwtGuard),
+    common_1.UseGuards(jwt_guard_guard_1.JwtGuard, roles_guard_1.RolesGuard),
+    roles_decorator_1.hasRoles('user'),
     common_1.Get(),
     __param(0, authuser_decorator_1.AuthUser()), __param(1, common_1.Query()),
     __metadata("design:type", Function),
@@ -45,7 +46,8 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserDailyMealsController.prototype, "getDataForUser", null);
 __decorate([
-    common_1.UseGuards(jwt_guard_guard_1.JwtGuard),
+    common_1.UseGuards(jwt_guard_guard_1.JwtGuard, roles_guard_1.RolesGuard),
+    roles_decorator_1.hasRoles('user'),
     common_1.Post(),
     __param(0, authuser_decorator_1.AuthUser()), __param(1, common_1.Body()),
     __metadata("design:type", Function),
@@ -53,7 +55,8 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserDailyMealsController.prototype, "addNewMealForUser", null);
 __decorate([
-    common_1.UseGuards(jwt_guard_guard_1.JwtGuard),
+    common_1.UseGuards(jwt_guard_guard_1.JwtGuard, roles_guard_1.RolesGuard),
+    roles_decorator_1.hasRoles('user'),
     common_1.Put(),
     __param(0, authuser_decorator_1.AuthUser()), __param(1, common_1.Body()),
     __metadata("design:type", Function),
@@ -61,7 +64,8 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserDailyMealsController.prototype, "updateUserMealsRecords", null);
 __decorate([
-    common_1.UseGuards(jwt_guard_guard_1.JwtGuard),
+    common_1.UseGuards(jwt_guard_guard_1.JwtGuard, roles_guard_1.RolesGuard),
+    roles_decorator_1.hasRoles('user'),
     common_1.Delete(),
     __param(0, authuser_decorator_1.AuthUser()), __param(1, common_1.Query()),
     __metadata("design:type", Function),

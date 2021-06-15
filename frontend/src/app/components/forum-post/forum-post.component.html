@@ -1,25 +1,66 @@
-<div class="dish-post">
-    <div class="dish-photo">
+<div class="post">
+    <div class="post-photo">
        <img [src]="saveUrl" #photo>
     </div>
-    <div class="dish-title">
+    <div class="post-title">
        {{post.title}}
     </div>
-    <div class="dish-content">
-        {{post.content}}
+    <div class="post-content">
+        <p> {{post.content}}</p>
     </div>
-    <div class="dish-raiting-div">
+    <div class="post-raiting-div">
         <div class="likes">
-            {{post.likes}}
+            Likes: {{post.likes}}
         </div>
         <div class="dislikes">
-            {{post.dislikes}}
+            Dislikes: {{post.dislikes}}
         </div>
         <div class="comment-count">
-            <!--{{post.commentCount}}-->
+            Comments: {{postComments.length}}
         </div>
     </div>
     <div class="comments-section">
-        <!--{{post.comments}}-->
+
+        <div class="comment-to-show" *ngFor="let item of [].constructor(commentsToShow); let i = index">
+
+            <div class="comment-instance">
+
+                <div class="comment-header">
+                    <p class="comment-author">
+                        {{postComments[i].authorName}}
+                    </p>
+
+                    <p class="comment-date">
+                        {{postComments[i].creationDate}}
+                    </p>
+                </div>
+
+                <div class="comment-body">
+                    <p> {{postComments[i].content}} </p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="comments-buttons">
+            <button *ngIf="postComments.length != 0" class="toggle-comment" (click)="toggleCommentsSection()">
+                Toggle Comments
+            </button>
+
+            <button [disabled]="(commentsToShow == postComments.length) || (commentsToShowCopy == postComments.length)" class="show-more" (click)="showMoreComments()">
+                Show {{moreToShow}} more comments
+            </button>
+        </div>
+
+    </div>
+    <div class="add-comment-section">
+        <button [disabled]="addingNewComment" class="add-comment-button" (click)="addingNewComment = !addingNewComment">Add new Comment</button>
+        <form *ngIf="addingNewComment" [formGroup]="commentForm" (ngSubmit)="submitComment()">
+            <textarea class="new-comment-content" type="text" formControlName="commentContent" placeholder="Write your comment here"></textarea>
+            <div class="buttons-section">
+                <button [disabled]="!commentForm.valid" class="action-button" type="submit">Submit Comment</button>
+                <button class="action-button" type="button" (click)="cancelComment()">Cancel</button>
+            </div>
+        </form>
     </div>
 </div>

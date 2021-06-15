@@ -51,7 +51,7 @@ __decorate([
     __metadata("design:type", String)
 ], PostEntity.prototype, "hashtags", void 0);
 __decorate([
-    typeorm_1.ManyToOne(() => users_entity_1.UserEntity, user => user.posts),
+    typeorm_1.ManyToOne(() => users_entity_1.UserEntity, user => user.posts, { onDelete: 'CASCADE' }),
     __metadata("design:type", users_entity_1.UserEntity)
 ], PostEntity.prototype, "user", void 0);
 __decorate([

@@ -14,7 +14,6 @@ export class LoginService {
 
   requestLogin(loginEmail: string, loginPassword: string)
   {
-    console.log("In the request");
     return this.http.post('http://127.0.0.1:3000/users/login', {"email": loginEmail, "password": loginPassword}, 
     { headers: new HttpHeaders({ 'Content-Type':  'application/json' }) })
     .pipe(tap(data => {
@@ -29,6 +28,50 @@ export class LoginService {
     .pipe(tap(data => {
       return data;
     }));
+  }
+
+  requestUserInfo()
+  {
+    return this.http.get<any>('http://localhost:3000/users/userInfo')
+    .pipe(
+      tap(data => {
+        return data;
+      }))
+  }
+
+  requestUserInfoChange(newName: string, newSurname: string)
+  {
+    return this.http.put<boolean>('http://localhost:3000/users/userInfo', {name: newName, surname: newSurname},
+    { headers: new HttpHeaders({ 'Content-Type':  'application/json' }) })
+    .pipe(tap(data => {
+      return data;
+    }))
+  }
+
+  requestPasswordVerification(password: string)
+  {
+    return this.http.get<boolean>('http://localhost:3000/users/password-verification', {params: {password: password}})
+    .pipe(tap(data => {
+      return data;
+    }))
+  }
+
+  requestPasswordChange(password: string)
+  {
+    return this.http.put<boolean>('http://localhost:3000/users/password-change', {password: password},
+    { headers: new HttpHeaders({ 'Content-Type':  'application/json' }) })
+    .pipe(tap(data => {
+      return data;
+    }))
+  }
+
+  requestAccountDelete()
+  {
+    return this.http.delete<boolean>('http://localhost:3000/users/delete')
+    .pipe(tap(data => {
+      return data;
+    }))
+    this.logout();
   }
 
   setSession(authResult: any) {

@@ -11,18 +11,30 @@
 
 #navigation
 {
-    height: 2.5rem;
-    width: 100vw;
+    height: 3rem;
+    width: 100vw; 
     position: fixed;
     overflow: hidden;
-    background-color:#4e555b;
+    background-color: #b20463;
+    justify-content: space-between;
 }
 
 #navigation-link
 {
     color: #fff;
-    background-color: #545b62;
     border-color: #4e555b;
     border-right:1px solid black;
     border-left:1px solid black;
+}
+
+#navbar-link
+{
+    padding: 3rem;
+    color:  snow;
+    border-left: 2px solid black;
+}
+
+.spacer
+{
+    flex:  1 1 auto;
 }

@@ -24,11 +24,11 @@ __decorate([
     __metadata("design:type", Number)
 ], RecipeIngridientsEntity.prototype, "amount_of_units", void 0);
 __decorate([
-    typeorm_1.ManyToOne(() => recipe_entity_1.RecipeEntity, recipe => recipe.recipe_ingridients, { primary: true }),
+    typeorm_1.ManyToOne(() => recipe_entity_1.RecipeEntity, recipe => recipe.recipe_ingridients, { primary: true, onDelete: 'CASCADE' }),
     __metadata("design:type", recipe_entity_1.RecipeEntity)
 ], RecipeIngridientsEntity.prototype, "recipe", void 0);
 __decorate([
-    typeorm_1.ManyToOne(() => food_entity_1.FoodEntity, ingridient => ingridient.recipe_ingridients, { primary: true }),
+    typeorm_1.ManyToOne(() => food_entity_1.FoodEntity, ingridient => ingridient.recipe_ingridients, { primary: true, onDelete: 'CASCADE' }),
     __metadata("design:type", food_entity_1.FoodEntity)
 ], RecipeIngridientsEntity.prototype, "ingridient", void 0);
 RecipeIngridientsEntity = __decorate([

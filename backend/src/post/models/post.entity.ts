@@ -29,7 +29,8 @@ export class PostEntity {
   @Column()
   hashtags: string;
 
-  @ManyToOne(() => UserEntity, user => user.posts)
+  @ManyToOne(() => UserEntity, user => user.posts,
+  { onDelete: 'CASCADE' })
   user: UserEntity;
 
   @OneToMany(() => CommentEntity, (comments : CommentEntity) => comments.post)

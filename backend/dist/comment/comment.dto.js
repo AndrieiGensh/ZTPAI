@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CommentDto = void 0;
 const class_validator_1 = require("class-validator");
 const user_dto_1 = require("../users/user.dto");
+const get_post_dto_1 = require("../post/get-post.dto");
 class CommentDto {
 }
 __decorate([

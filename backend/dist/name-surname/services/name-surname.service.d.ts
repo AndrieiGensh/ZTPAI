@@ -6,4 +6,5 @@ export declare class NameSurnameService {
     constructor(namesurnameRepo: Repository<NameSurnameEntity>);
     create(namesurname: NameSurnameDto): Promise<NameSurnameDto>;
     findAll(): Promise<NameSurnameDto[]>;
+    findByNameSurnameCombination(name: string, surname: string): Promise<NameSurnameDto>;
 }

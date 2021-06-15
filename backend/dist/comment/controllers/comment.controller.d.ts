@@ -3,6 +3,7 @@ import { CommentService } from '../services/comment.service';
 export declare class CommentController {
     private commentService;
     constructor(commentService: CommentService);
-    create(comment: CommentDto): Promise<CommentDto>;
+    addComment(user: any, body: any): Promise<void>;
     findAll(): Promise<CommentDto[]>;
+    getCommentsForPost(user: any, query: any): Promise<any[]>;
 }

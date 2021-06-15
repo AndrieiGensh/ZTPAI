@@ -15,6 +15,7 @@ import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatSortModule } from "@angular/material/sort";
 import { MatTableModule } from "@angular/material/table";
 import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatIconModule } from "@angular/material/icon";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,6 +32,10 @@ import { JWTInterceptor } from './helpers/interceptors/JWTInterceptor.intercepto
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DiaryTableComponent } from './components/diary-table/diary-table.component';
 import { DialogBoxComponent } from './components/dialog-box/dialog-box.component';
+import { PostDialogBoxComponent } from './components/post-dialog-box/post-dialog-box.component';
+import { HashtagComponent } from './components/hashtag/hashtag.component';
+import { PasswordConfirmDialogBox } from './components/password-confirm-dialog-box/password-confirm-dialog-box.component';
+import { ActionAcceptionDialogBox } from './components/action-acception-dialog-box/action-acception-dialog-box.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +49,11 @@ import { DialogBoxComponent } from './components/dialog-box/dialog-box.component
     UserComponent,
     ForumPostComponent,
     DiaryTableComponent,
-    DialogBoxComponent
+    DialogBoxComponent,
+    PostDialogBoxComponent,
+    HashtagComponent,
+    PasswordConfirmDialogBox,
+    ActionAcceptionDialogBox
   ],
   imports: [
     BrowserModule,
@@ -63,7 +72,8 @@ import { DialogBoxComponent } from './components/dialog-box/dialog-box.component
     MatTableModule,
     MatInputModule,
     MatSortModule,
-    MatSelectModule
+    MatSelectModule,
+    MatIconModule
   ],
   providers: [
     {

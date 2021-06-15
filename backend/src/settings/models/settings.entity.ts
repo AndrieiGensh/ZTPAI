@@ -13,6 +13,7 @@ export class SettingsEntity {
   @Column()
   description: string;
 
-  @ManyToMany(() => UserEntity, (user : UserEntity) => user.settings)
+  @ManyToMany(() => UserEntity, (user : UserEntity) => user.settings,
+  { onDelete: 'CASCADE' })
   users: UserEntity[];
 }

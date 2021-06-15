@@ -42,7 +42,7 @@ __decorate([
     __metadata("design:type", Object)
 ], FoodEntity.prototype, "proteinsPerUnit", void 0);
 __decorate([
-    typeorm_1.ManyToOne(() => measure_units_entity_1.MeasureUnitsEntity, (measureUnit) => measureUnit.food),
+    typeorm_1.ManyToOne(() => measure_units_entity_1.MeasureUnitsEntity, (measureUnit) => measureUnit.food, { onDelete: 'CASCADE' }),
     __metadata("design:type", measure_units_entity_1.MeasureUnitsEntity)
 ], FoodEntity.prototype, "measureUnits", void 0);
 __decorate([

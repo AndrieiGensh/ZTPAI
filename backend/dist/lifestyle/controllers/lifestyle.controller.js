@@ -16,6 +16,10 @@ exports.LifestyleController = void 0;
 const common_1 = require("@nestjs/common");
 const lifestyle_dto_1 = require("../lifestyle.dto");
 const lifestyle_service_1 = require("../services/lifestyle.service");
+const authuser_decorator_1 = require("../../auth/decorators/authuser.decorator");
+const jwt_guard_guard_1 = require("../../auth/guards/jwt-guard.guard");
+const roles_guard_1 = require("../../auth/guards/roles.guard");
+const roles_decorator_1 = require("../../auth/decorators/roles.decorator");
 let LifestyleController = class LifestyleController {
     constructor(lifestyleService) {
         this.lifestyleService = lifestyleService;
@@ -28,6 +32,8 @@ let LifestyleController = class LifestyleController {
     }
 };
 __decorate([
+    common_1.UseGuards(jwt_guard_guard_1.JwtGuard, roles_guard_1.RolesGuard),
+    roles_decorator_1.hasRoles('admin'),
     common_1.Post(),
     __param(0, common_1.Body()),
     __metadata("design:type", Function),

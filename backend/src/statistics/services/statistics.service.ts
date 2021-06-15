@@ -20,15 +20,12 @@ export class StatisticsService {
 
     async addOrUpdateStats(newStats: StatsDto, userId: number, date: string): Promise<GetStatsDto>
     { 
-        console.log("IN STATS ", newStats, date, newStats.date, newStats.date.toISOString());
         const searchStats: GetStatsDto = await this.statsRepo.createQueryBuilder('s')
         //.select('s.date').addSelect('kcal').addSelect('fats').addSelect('proteins')
         .leftJoinAndSelect('s.user', 'us').where('us.id = :usId', {usId: userId})
         .andWhere('s.date = :MyDate', {MyDate: date}).getOne();
-        console.log("I FOUND ", searchStats);
         if(searchStats === undefined)
         {
-            console.log("NO STATS FOR THIS USER FOR TODAY");
             const stats = new CreateStatsDto();
             const user : UserDto = await this.userService.findById(userId);
             stats.carbs = newStats.carbs;
@@ -45,31 +42,23 @@ export class StatisticsService {
 
     async updateExistingStats(updates: StatsDto, recordToBeUpdated: GetStatsDto): Promise<GetStatsDto>
     {
-        console.log("IN AUPDATE EXISTING STATS updates=", updates, " RECORD TO BE UPDATED ", recordToBeUpdated);
         recordToBeUpdated.carbs += updates.carbs;
         recordToBeUpdated.fats += updates.fats;
         recordToBeUpdated.kcal += updates.kcal;
         recordToBeUpdated.proteins += updates.proteins;
-        console.log("BUT UPDATED RECORD = ", recordToBeUpdated)
         return this.statsRepo.save(recordToBeUpdated);
     }
 
     async getStats(userId: number, type: string, days: number | null, date: string): Promise<any>
     {
-        console.log("IN STST GET ALL", userId, type, days, date, new Date(date));
         let result: GetStatsDto | GetStatsDto[];
         switch(type)
         {
             case 'daily':
             {
-                console.log("TYPE IS DAILY");
                 result = await this.statsRepo.createQueryBuilder('s').leftJoin('s.user', 'uid')
                 .where('s.date = :MyDate', {MyDate: date})
                 .andWhere('uid.id = :UID', {UID: userId}).getOne();
-                console.log("SREACH RES IS ", result, "/", result.date);
-                const testDate = new Date(date);
-                testDate.setDate(testDate.getDate() + 20);
-                console.log("I WONDER ... ", testDate.toISOString());
             }
             break;
             case 'timeline':
@@ -80,11 +69,9 @@ export class StatisticsService {
                 }
                 const testDate = new Date(date);
                 testDate.setDate(testDate.getDate() - days);
-                console.log("START AT ", testDate.toISOString());
                 result = await this.statsRepo.createQueryBuilder('s').leftJoin('s.user', 'uid')
                 .where('s.date >= :MyDate', {MyDate: testDate.toISOString()})
-                .andWhere('uid.id = :UID', {UID: userId}).getMany();
-                console.log("SREACH RES IS ", result);
+                .andWhere('uid.id = :UID', {UID: userId}).orderBy('s.date', 'ASC').getMany();
             } 
             break;
             default:
@@ -95,6 +82,7 @@ export class StatisticsService {
         if(result === undefined)
         {
             console.log("Ehhhhhhh, undefined?", result);
+            //not really possible to hit this option
         }
         return result === undefined ? null : result;
     }

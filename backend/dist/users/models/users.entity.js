@@ -18,6 +18,7 @@ const comment_entity_1 = require("../../comment/models/comment.entity");
 const statistics_entity_1 = require("../../statistics/models/statistics.entity");
 const user_info_entity_1 = require("../../user-info/models/user-info.entity");
 const user_daily_meals_entity_1 = require("../../user-daily-meals/models/user-daily-meals.entity");
+const user_dto_1 = require("../user.dto");
 let UserEntity = class UserEntity {
     emailToLower() {
         this.email = this.email.toLowerCase();
@@ -35,6 +36,10 @@ __decorate([
     typeorm_1.Column({ select: false }),
     __metadata("design:type", String)
 ], UserEntity.prototype, "password", void 0);
+__decorate([
+    typeorm_1.Column({ type: 'enum', enum: user_dto_1.UserRoles, default: user_dto_1.UserRoles.USER }),
+    __metadata("design:type", String)
+], UserEntity.prototype, "roles", void 0);
 __decorate([
     typeorm_1.OneToMany(() => comment_entity_1.CommentEntity, comments => comments.user),
     __metadata("design:type", Array)

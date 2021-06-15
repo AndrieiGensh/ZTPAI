@@ -32,7 +32,6 @@ export class DiaryTableDataSource implements DataSource<DiaryTableRecord> {
         .subscribe(
             tableRecords => {
                 this.tableRecordsSubject.next(tableRecords);
-                console.log(tableRecords);
             }
         )
     }

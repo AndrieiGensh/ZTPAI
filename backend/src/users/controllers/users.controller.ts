@@ -1,11 +1,12 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/ban-types */
 import { Get } from '@nestjs/common';
-import { Post } from '@nestjs/common';
-import { Body, Request } from '@nestjs/common';
+import { Post, Delete, Put } from '@nestjs/common';
+import { Body, Request, Query } from '@nestjs/common';
 import { UseGuards } from '@nestjs/common';
 import { Controller } from '@nestjs/common';
 import { JwtGuard } from 'src/auth/guards/jwt-guard.guard';
+import { AuthUser } from 'src/auth/decorators/authuser.decorator';
 import { LocalAuthGuard } from 'src/auth/guards/local-auth.guard';
 import { PostFilters } from 'src/post/models/post-filters';
 import { UserEntity } from '../models/users.entity';
@@ -36,8 +37,43 @@ export class UsersController {
     @Post('login')
     async login(@Body() user : UserDto) : Promise<Object>
     {
-        console.log("Before login methods");
         const jwt = await this.userService.login(user);
         return { access_token: jwt, expiresIn: '100'};
     }
+
+    @UseGuards(JwtGuard)
+    @Get('userInfo')
+    async getUserInfo(@AuthUser() user): Promise<Object>
+    {
+        return this.userService.getUserInfo(user.userId);
+    }
+
+    @UseGuards(JwtGuard)
+    @Put('userInfo')
+    async changeUserInfo(@AuthUser() user, @Body() body): Promise<boolean>
+    {
+        return this.userService.changeUserInfo(user.userId, body.name, body.surname);
+    }
+
+    @UseGuards(JwtGuard)
+    @Get('password-verification')
+    async verifyPassword(@AuthUser() user, @Query() query): Promise<boolean>
+    {
+        return this.userService.verifyPassword(user.userId, query.password);
+    }
+
+    @UseGuards(JwtGuard)
+    @Put('password-change')
+    async changePassword(@AuthUser() user, @Body() body): Promise<boolean>
+    {
+        return this.userService.changePassword(user.userId, body.password);
+    }
+
+    @UseGuards(JwtGuard)
+    @Delete('delete')
+    async deleteAccount(@AuthUser() user): Promise<boolean>
+    {
+        return this.userService.deleteUser(user.userId);
+    }
+
 }

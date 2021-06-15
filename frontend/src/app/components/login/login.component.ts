@@ -36,7 +36,6 @@ export class LoginComponent implements OnInit {
     await this.loginService.requestLogin(loginInfo.email, loginInfo.password)
     .subscribe({
       next: data =>{
-        console.log(data);
         this.loginService.setSession(data);
         this.router.navigate(['/user/diary']);
       },

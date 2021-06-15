@@ -22,7 +22,8 @@ export class StatisticsEntity {
   @Column({type: 'float'})
   proteins: number;
 
-  @ManyToOne(() => UserEntity, (user : UserEntity) => user.stats)
+  @ManyToOne(() => UserEntity, (user : UserEntity) => user.stats,
+  { onDelete: 'CASCADE' })
   user: UserEntity;
 
 }

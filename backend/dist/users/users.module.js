@@ -15,13 +15,17 @@ const auth_service_1 = require("../auth/services/auth.service");
 const users_controller_1 = require("./controllers/users.controller");
 const users_entity_1 = require("./models/users.entity");
 const users_service_1 = require("./services/users.service");
+const name_surname_module_1 = require("../name-surname/name-surname.module");
+const user_info_module_1 = require("../user-info/user-info.module");
 let UsersModule = class UsersModule {
 };
 UsersModule = __decorate([
     common_1.Module({
         imports: [
             typeorm_1.TypeOrmModule.forFeature([users_entity_1.UserEntity]),
-            common_1.forwardRef(() => auth_module_1.AuthModule)
+            common_1.forwardRef(() => auth_module_1.AuthModule),
+            user_info_module_1.UserInfoModule,
+            name_surname_module_1.NameSurnameModule
         ],
         controllers: [users_controller_1.UsersController],
         providers: [users_service_1.UsersService, local_auth_guard_1.LocalAuthGuard],

@@ -19,6 +19,7 @@ UserInfoModule = __decorate([
         imports: [typeorm_1.TypeOrmModule.forFeature([user_info_entity_1.UserInfoEntity])],
         controllers: [user_info_controller_1.UserInfoController],
         providers: [user_info_service_1.UserInfoService],
+        exports: [user_info_service_1.UserInfoService]
     })
 ], UserInfoModule);
 exports.UserInfoModule = UserInfoModule;

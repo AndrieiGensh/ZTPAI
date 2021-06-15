@@ -27,6 +27,12 @@ let NameSurnameService = class NameSurnameService {
     findAll() {
         return this.namesurnameRepo.find();
     }
+    async findByNameSurnameCombination(name, surname) {
+        return this.namesurnameRepo.createQueryBuilder('ns')
+            .where('ns.name = :name', { name: name })
+            .andWhere('ns.surname = :surname', { surname: surname })
+            .getOne();
+    }
 };
 NameSurnameService = __decorate([
     common_1.Injectable(),

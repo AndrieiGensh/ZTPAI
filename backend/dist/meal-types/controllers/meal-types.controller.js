@@ -16,12 +16,15 @@ exports.MealTypesController = void 0;
 const common_1 = require("@nestjs/common");
 const meal_types_dto_1 = require("../meal-types.dto");
 const meal_types_service_1 = require("../services/meal-types.service");
+const authuser_decorator_1 = require("../../auth/decorators/authuser.decorator");
+const jwt_guard_guard_1 = require("../../auth/guards/jwt-guard.guard");
+const roles_guard_1 = require("../../auth/guards/roles.guard");
+const roles_decorator_1 = require("../../auth/decorators/roles.decorator");
 let MealTypesController = class MealTypesController {
     constructor(mealtypesService) {
         this.mealtypesService = mealtypesService;
     }
     async addnewtype(type) {
-        console.log(type);
         return this.mealtypesService.addNewType(type);
     }
     async getAll() {
@@ -29,6 +32,8 @@ let MealTypesController = class MealTypesController {
     }
 };
 __decorate([
+    common_1.UseGuards(jwt_guard_guard_1.JwtGuard, roles_guard_1.RolesGuard),
+    roles_decorator_1.hasRoles('admin'),
     common_1.Post(),
     __param(0, common_1.Body()),
     __metadata("design:type", Function),

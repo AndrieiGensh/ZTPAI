@@ -19,6 +19,7 @@ SexModule = __decorate([
         imports: [typeorm_1.TypeOrmModule.forFeature([sex_entity_1.SexEntity])],
         controllers: [sex_controller_1.SexController],
         providers: [sex_service_1.SexService],
+        exports: [sex_service_1.SexService]
     })
 ], SexModule);
 exports.SexModule = SexModule;

@@ -12,7 +12,7 @@ export class AuthService {
 
     async generateJWT(user: UserDto) : Promise<string>
     {
-        const payload = {sub: user.id};
+        const payload = {sub: user.id, roles: user.roles};
         return this.jwtService.signAsync(payload);
     }
 

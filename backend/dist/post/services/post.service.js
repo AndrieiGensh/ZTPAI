@@ -45,7 +45,6 @@ let PostService = class PostService {
     }
     async createPost(userId, title, content, photoPath, hashtags, date) {
         const user = await this.userService.findById(userId);
-        console.log("The user is ", user);
         const post = new create_post_dto_1.CreatePostDto;
         post.title = title;
         post.content = content;
@@ -55,7 +54,6 @@ let PostService = class PostService {
         post.hashtags = hashtags;
         post.user = user;
         post.date = new Date(date);
-        console.log("We are about to save this post instance ", post);
         return this.postRepo.save(post);
     }
     async updateLikesDislikes(postId, likes, dislikes) {

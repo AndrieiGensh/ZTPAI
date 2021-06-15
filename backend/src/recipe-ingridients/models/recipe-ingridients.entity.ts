@@ -11,10 +11,10 @@ export class RecipeIngridientsEntity {
   @Column()
   amount_of_units: number;
 
-  @ManyToOne(() => RecipeEntity, recipe => recipe.recipe_ingridients, { primary : true })
+  @ManyToOne(() => RecipeEntity, recipe => recipe.recipe_ingridients, { primary : true, onDelete: 'CASCADE'})
   recipe: RecipeEntity;
 
-  @ManyToOne(() => FoodEntity, ingridient => ingridient.recipe_ingridients, { primary : true })
+  @ManyToOne(() => FoodEntity, ingridient => ingridient.recipe_ingridients, { primary : true, onDelete: 'CASCADE'})
   ingridient: FoodEntity;
 
 }

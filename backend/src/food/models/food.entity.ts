@@ -25,7 +25,8 @@ export class FoodEntity {
   @Column({type: 'float'})
   proteinsPerUnit;
 
-  @ManyToOne(() => MeasureUnitsEntity, (measureUnit : MeasureUnitsEntity) => measureUnit.food)
+  @ManyToOne(() => MeasureUnitsEntity, (measureUnit : MeasureUnitsEntity) => measureUnit.food,
+  { onDelete: 'CASCADE' })
   measureUnits: MeasureUnitsEntity;
 
   @OneToMany(() => RecipeIngridientsEntity, recipe_ingridients => recipe_ingridients.ingridient)

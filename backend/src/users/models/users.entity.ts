@@ -7,6 +7,7 @@ import { CommentEntity } from 'src/comment/models/comment.entity';
 import { StatisticsEntity } from 'src/statistics/models/statistics.entity';
 import { UserInfoEntity } from 'src/user-info/models/user-info.entity';
 import { UserDailyMealsEntity } from 'src/user-daily-meals/models/user-daily-meals.entity';
+import { UserRoles } from '../user.dto';
 
 @Entity()
 export class UserEntity {
@@ -18,6 +19,9 @@ export class UserEntity {
 
   @Column({select : false})
   password: string;
+
+  @Column({ type: 'enum', enum: UserRoles, default: UserRoles.USER})
+  roles: UserRoles;
 
   @OneToMany(() => CommentEntity, comments => comments.user)
   comments: CommentEntity[] 
@@ -49,3 +53,5 @@ export class UserEntity {
     this.email = this.email.toLowerCase();
   } 
 }
+
+

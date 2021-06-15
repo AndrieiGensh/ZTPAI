@@ -15,9 +15,7 @@ export class StatsService {
   requestStatsInitData(type: string, days: number, date: string)
   {
     let resultData: any;
-    console.log("In the stats request");
     let par = new HttpParams().append("type", type).append("days", days.toString()).append("date", date);
-    console.log("Params ", par);
     return this.http.get('http://127.0.0.1:3000/statistics', {params: par, observe: 'body'})
     .pipe(tap(data => {
       return data;

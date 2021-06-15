@@ -2,6 +2,12 @@
 import { IsNumber, IsString, IsEmail } from 'class-validator';
 import { UserInfoDto } from 'src/user-info/user-info.dto';
 
+export enum UserRoles{
+  ADMIN = 'admin',
+  USER = 'user',
+  EDITOR = 'editor'
+}
+
 export class UserDto{
     @IsNumber()
     id: number;
@@ -13,4 +19,6 @@ export class UserDto{
     password: string;
 
     userInfo: UserInfoDto;
+
+    roles: UserRoles;
 }
