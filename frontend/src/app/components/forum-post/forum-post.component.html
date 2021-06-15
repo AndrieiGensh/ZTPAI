@@ -1,0 +1,66 @@
+<div class="post">
+    <div class="post-photo">
+       <img [src]="saveUrl" #photo>
+    </div>
+    <div class="post-title">
+       {{post.title}}
+    </div>
+    <div class="post-content">
+        <p> {{post.content}}</p>
+    </div>
+    <div class="post-raiting-div">
+        <div class="likes">
+            Likes: {{post.likes}}
+        </div>
+        <div class="dislikes">
+            Dislikes: {{post.dislikes}}
+        </div>
+        <div class="comment-count">
+            Comments: {{postComments.length}}
+        </div>
+    </div>
+    <div class="comments-section">
+
+        <div class="comment-to-show" *ngFor="let item of [].constructor(commentsToShow); let i = index">
+
+            <div class="comment-instance">
+
+                <div class="comment-header">
+                    <p class="comment-author">
+                        {{postComments[i].authorName}}
+                    </p>
+
+                    <p class="comment-date">
+                        {{postComments[i].creationDate}}
+                    </p>
+                </div>
+
+                <div class="comment-body">
+                    <p> {{postComments[i].content}} </p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="comments-buttons">
+            <button *ngIf="postComments.length != 0" class="toggle-comment" (click)="toggleCommentsSection()">
+                Toggle Comments
+            </button>
+
+            <button [disabled]="(commentsToShow == postComments.length) || (commentsToShowCopy == postComments.length)" class="show-more" (click)="showMoreComments()">
+                Show {{moreToShow}} more comments
+            </button>
+        </div>
+
+    </div>
+    <div class="add-comment-section">
+        <button [disabled]="addingNewComment" class="add-comment-button" (click)="addingNewComment = !addingNewComment">Add new Comment</button>
+        <form *ngIf="addingNewComment" [formGroup]="commentForm" (ngSubmit)="submitComment()">
+            <textarea class="new-comment-content" type="text" formControlName="commentContent" placeholder="Write your comment here"></textarea>
+            <div class="buttons-section">
+                <button [disabled]="!commentForm.valid" class="action-button" type="submit">Submit Comment</button>
+                <button class="action-button" type="button" (click)="cancelComment()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>

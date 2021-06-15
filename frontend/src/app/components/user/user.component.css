@@ -1,23 +1,40 @@
 .content{
     width: 100%;
-    height: 100%;
-    min-height: inherit;
+    height: calc(100% - 2.5rem);
+    display: block;
     background-image: url("/../assets/img/bg1.png");
     background-attachment: fixed;
-    padding: 1em 0 1em 0;
+    padding: 2.5rem 0 1rem 0;
+    margin-top: 2.5rem;
+    overflow: auto;
 }
 
 #navigation
 {
-    height: 15%;
-    background-color:#4e555b;
+    height: 3rem;
+    width: 100vw; 
+    position: fixed;
+    overflow: hidden;
+    background-color: #b20463;
+    justify-content: space-between;
 }
 
 #navigation-link
 {
     color: #fff;
-    background-color: #545b62;
     border-color: #4e555b;
     border-right:1px solid black;
     border-left:1px solid black;
+}
+
+#navbar-link
+{
+    padding: 3rem;
+    color:  snow;
+    border-left: 2px solid black;
+}
+
+.spacer
+{
+    flex:  1 1 auto;
 }

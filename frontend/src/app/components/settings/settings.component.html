@@ -1,1 +1,57 @@
-<p>settings works!</p>
+<div class="settings-section">
+    <div class="general-settings">
+        <div class="user-info-settings">
+            <fieldset [disabled]="!infoEditingMode">
+                <form [formGroup]="userInfoForm">
+                    <input type="text" formControlName="userName" />
+                    <input type="text" formControlName="userSurname" />
+                </form>
+            </fieldset>
+            <div class="buttons-section">
+                <button *ngIf="displayInfoChangeButton" class="settings-button" (click)="requestInfoEdit()">
+                    Edit Settings
+                </button>
+                <button *ngIf="infoEditingMode" [disabled]="!userInfoForm.valid" class="settings-button confirm" (click)="confirmInfoEdit()">Confirm Edit</button>
+                <button *ngIf="infoEditingMode" class="settings-button cancel" (click)="cancelInfoEdit()">Cancel Edit</button>
+            </div>
+        </div>
+        <div class="password-change">
+            <fieldset [disabled]="!passwordEditingMode">
+                <form [formGroup]="passwordForm" >
+                    <input type="password" formControlName="password" placeholder="your password"/>
+                </form>
+            </fieldset>
+            <div *ngIf="passwordForm.errors?.wrongPassword && passwordForm.controls['password']?.dirty" class="message">
+                {{passwordForm.errors?.wrongPassword.message}}
+            </div>
+            <div class="buttons-section">
+                <button *ngIf="displayPasswordChangeButton" class="settings-button" (click)="requestPasswordEdit()">
+                    ChangePassword
+                </button>
+                <button *ngIf="passwordEditingMode" [disabled]="!passwordForm.valid" class="settings-button confirm" (click)="confirmPasswordEdit()">Confirm Edit</button>
+                <button *ngIf="passwordEditingMode" class="settings-button cancel" (click)="cancelPasswordEdit()">Cancel Edit</button>
+            </div>
+        </div>
+    </div>
+    <div class="privacy-policy">
+        <button class="toggle-privacy-policy" (click)="policyShow = !policyShow">
+            Privacy Policy
+        </button>
+        <div *ngIf="policyShow" class="policy-content">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis orci purus, mollis ac nisl in, lobortis ornare velit. Aenean nec leo tristique, fermentum sapien sit amet, viverra risus. Fusce libero nisl, molestie eget interdum non, ullamcorper non orci. Mauris finibus mi in lacus efficitur tincidunt. Sed dapibus eu sem eget gravida. Etiam ultrices erat eu iaculis interdum. Vestibulum pharetra gravida leo, id vulputate lorem euismod at. Sed efficitur dui non hendrerit venenatis. Maecenas tempor lacus sit amet turpis gravida commodo. Vestibulum tortor ligula, eleifend et egestas quis, gravida sed augue. Integer euismod cursus consectetur. Nulla facilisi. Donec ullamcorper quis lorem nec cursus. Nunc non rutrum urna.
+
+            Morbi pretium cursus urna, at pretium dolor ullamcorper ac. Suspendisse porttitor leo et molestie commodo. In hac habitasse platea dictumst. Nullam vitae semper felis. Curabitur efficitur non nisl nec dapibus. Suspendisse non scelerisque tortor. Donec non mi eget nunc malesuada laoreet vel accumsan lacus. Mauris a lacinia tortor. Fusce a bibendum velit. Nulla aliquam nunc diam. Sed pulvinar, diam sed feugiat rutrum, ex ligula laoreet ipsum, molestie dignissim arcu quam ac urna.
+
+            Suspendisse massa est, venenatis vel ante in, hendrerit mattis nunc. Donec tincidunt porta nisl. Morbi non imperdiet mauris. In hac habitasse platea dictumst. Aenean at rhoncus ex. Mauris sit amet mauris ac erat euismod eleifend. Nullam cursus eleifend nunc nec dignissim. Cras cursus elit nunc, non laoreet nisl sagittis eget. Maecenas malesuada, erat a volutpat lacinia, erat lectus pellentesque nibh, ac laoreet ipsum diam vel nisl.
+
+            Donec vitae nunc eros. Cras lobortis dui non purus scelerisque, et gravida orci venenatis. Aenean mattis leo non lorem sollicitudin placerat. Donec sapien mi, sodales sed elit ut, venenatis facilisis nisl. Donec hendrerit elit elementum malesuada posuere. Aliquam id nisi dui. In finibus lectus eget est facilisis ullamcorper. Curabitur eget sapien sit amet tortor pharetra dictum. Vivamus blandit suscipit enim, at maximus dui aliquet a. Mauris ex diam, auctor ut neque ac, sagittis porta erat. Morbi nibh orci, maximus eu bibendum id, eleifend auctor lectus. Maecenas et turpis efficitur, pulvinar nunc eu, dictum purus. Quisque eget velit urna. Nam augue enim, ultrices sit amet semper et, lacinia non tellus. Proin cursus nulla nec lacinia scelerisque.
+
+            Donec orci nibh, scelerisque vitae tincidunt sit amet, commodo at est. Etiam porta, sapien non vulputate facilisis, mauris lectus pharetra dolor, sed interdum sem purus ut tellus. Aliquam sed urna id sapien laoreet blandit vitae sed eros. Quisque feugiat mi eget nunc rutrum, a elementum elit egestas. Ut mollis sagittis felis, at faucibus ex iaculis sed. Fusce aliquam ullamcorper congue. Vivamus ultricies, turpis in rhoncus molestie, lectus neque ultricies sapien, elementum tempus arcu dui ut tellus. Donec lectus libero, pellentesque ac accumsan ut, placerat sed massa. Duis eleifend, erat vel pellentesque rhoncus, lacus ipsum facilisis orci, ac commodo tortor velit ut tellus. Mauris pharetra fringilla tellus, at porttitor risus efficitur varius. Etiam sit amet ante vulputate ante consectetur feugiat.
+        </div>
+    </div>
+    <div class="delete-account">
+        <button class="delete" (click)="requestAccountDelete()">
+            Deletee Account
+        </button>
+    </div>
+</div>

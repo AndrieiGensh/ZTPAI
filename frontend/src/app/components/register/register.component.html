@@ -1,3 +1,36 @@
-<p>register works!</p>
-<button routerLink="/user">Register</button>
-<button routerLink="/login">Login</button>
+<div class="sign-in-body">
+    <div class="container">
+        <div class="message">
+          <p class="message-content" *ngIf="f().password.touched && f().password.invalid">Not valid Password</p>
+          <p class="message-content" *ngIf="f().email.touched && f().email.invalid">Not valid Email</p>
+          <p class="message-content" *ngIf="f().confirmPassword.touched && registerForm.errors?.mismatch">Not suitable ConfirmPassword</p>
+        </div>
+        <div id="login-box">
+            <div class="left">
+              <h1>Sign up</h1>
+              <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <input formControlName="email" type="text" name="email" placeholder="E-mail" />
+                <input formControlName="password" type="password" name="password" placeholder="Password" />
+                <input formControlName="confirmPassword" type="password" name="password2" placeholder="Retype password" />
+                <div class="buttons">
+                  <input type="submit" name="signup_submit" value="Sign me up" [disabled]="!registerForm.valid"/>
+                </div>
+              </form>
+            </div>
+            
+            <div class="right">
+              <h1>Sign in with<br />social network</h1>
+              
+              <button class="social-signin facebook">Log in with facebook</button>
+              <button class="social-signin twitter">Log in with Twitter</button>
+              <button class="social-signin google">Log in with Google+</button>
+            </div>
+            <div class="or">OR</div>
+        </div>
+
+        <div id="login-if">
+            <div class="question">Already Have an account?</div>
+            <input type="submit" name="signup_submit" value="Log in" routerLink="/login"/>
+        </div>
+    </div>
+</div>

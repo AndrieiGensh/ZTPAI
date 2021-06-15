@@ -1,0 +1,180 @@
+.post, .post-raiting-div, .comment-header, .add-comment-section, .buttons-section, .comments-buttons
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.post
+{
+    width: 50rem;
+    max-height:  max-content;
+    margin: 2rem auto 2rem auto;
+    padding: 1em;
+    border-radius: 30px;
+    background-color: #fe5e5e;
+    flex-direction: column;
+    box-shadow: 0px 0px 0px 5px rgb(255 255 255 / 40%), 0px 4px 20px rgb(0 0 0 / 33%);
+}
+
+.post-title
+{
+    text-align: center;
+    color:black;
+    height: max-content;
+    width: max-content;
+    margin: 1em 0 1em 0;
+    font-size: 1.3em;
+}
+
+.post-photo
+{
+    width: 100%;
+    height: 60%;
+}
+
+.post-photo > img{
+    border-radius: 30px;
+}
+
+.post-photo img{
+    width: 100%;
+    height: 100%;
+}
+
+.post-content
+{
+    border-radius: 20px;
+    border: solid 2px gray;
+    padding: 1em;
+    height: max-content;
+    width: 100%;
+    box-shadow: 0px 0px 0px 5px rgb(255 255 255 / 40%), 0px 4px 20px rgb(0 0 0 / 33%);
+    background-color: white;
+    word-wrap: break-word;
+    color: black;
+}
+
+.post-description::after{
+
+}
+
+.post-raiting-div
+{
+    width: 70%;
+    height: 10%;
+    right: 0;
+    flex-direction: row;
+    margin: 1em;
+}
+
+.post-raiting-div > div{
+    margin: auto;
+}
+
+.likes
+{
+    color: red;
+}
+
+.dislikes
+{
+    color: black;
+}
+
+.comments-section
+{
+    color: black;
+    width:  100%;
+}
+
+.comment-to-show
+{
+    display:  block;
+}
+
+.comment-instance
+{
+    background-color:  white;
+    height:  max-content;
+    width:  100%;
+    margin:  0.2rem;
+    border-radius:  0px 30px 30px;
+    padding:  1rem;
+}
+
+.comment-header
+{
+    flex-direction:  row;
+    justify-content: left;
+    width:  100%;
+    height:  max-content;
+}
+
+.comment-author, .comment-date
+{
+    color:  black;
+}
+
+.comment-body
+{
+    background-color:  rgb(67,62,62);
+    word-wrap: break-word;
+    color:  white;
+}
+
+.comment-body p
+{
+    padding: 0.2rem;
+    border:  solid 1px white;
+}
+
+.comments-buttons
+{
+    flex-direction:  column;
+    row-gap: 0.5rem;
+    margin:  1rem 0;
+}
+
+.comments-buttons>button
+{
+    text-align: center;
+    color: white;
+    width: 60%;
+    height: 40px;
+    background-color: rgb(66,66,66);
+    margin:0 auto 1em auto;
+}
+
+.add-comment-section
+{
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
+.buttons-section
+{
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
+.add-comment-button
+{
+    width: 15rem;
+    height: 2.5rem;
+    background-color:  gray;
+}
+
+.new-comment-content
+{
+    width: 30rem;
+    min-height: 5rem;
+}
+
+.action-button
+{
+    background-color: #ababab;
+    height: 2.5rem;
+    font-size: 1rem;
+    width:  100%;
+}

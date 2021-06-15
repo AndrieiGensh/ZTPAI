@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>Create new Post</h1>
+<mat-dialog-content class="dialog-content">
+
+	<form [formGroup]="postForm" class="main-form">
+		<input matInput formControlName="title" type="text" name="title" placeholder="Post Title"/>
+		<input #fileUpload name ="fileUpload" type="file" placeholder="Select your post image" accept="image/*" (change)="uploadFile()"/>
+		<textarea formControlName="content" type="text" name="content" placeholder="Post Content"> </textarea>
+	</form>
+		<div *ngIf="hashtags.length != 0" class="hashtags-section">
+			<app-hashtag *ngFor="let hashtag of hashtags"
+				[hashtagId]="hashtag.id"
+				[hashtagValue]="hashtag.value"
+				(deleteHashtag)="deleteFromHashtags($event)"
+				>
+			</app-hashtag>
+		</div>
+	<button *ngIf="!initAdd" class="action-button" (click)="initAddHashtag()">Add hashtag</button>
+		<div [hidden]="!initAdd">
+			<form [formGroup]="hashtagForm" class="secondary-form">
+				<input type="text" placeholder="Add new tag" formControlName="hashtagValue"/>
+				<div class="dialog-actions">
+					<button mat-button class="action-button" [disabled]="!hashtagForm.valid" (click)="addToHashtags()">Add</button>
+					<button mat-button class="action-button" (click)="cancelAddHashtag()">Cancel</button>
+				</div>
+			</form>
+		</div>
+
+</mat-dialog-content>
+<div mat-dialog-actions calss="dialog-actions">
+  <button mat-button class="action-button" [disabled]="!postForm.valid" (click)="doAction()">Submit</button>
+  <button mat-button class="action-button" (click)="closeDialog()" mat-flat-button color="warn">Cancel</button>
+</div>
+

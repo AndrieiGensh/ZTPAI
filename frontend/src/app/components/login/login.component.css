@@ -1,15 +1,17 @@
-.body {
+.sign-in-body {
     background-image: url("/../assets/img/bg1.png");
     font-family: "Helvetica Neue", Helvetica, Arial;
-    padding-top: 20px;
+    margin: 0;
+    padding: 0;
 }
 
 .container {
     width: 406px;
-    height: 100vh;
+    height: calc(100vh - 60px);
     max-width: 406px;
     margin: auto;
     display: flex;
+    padding: 0;
 }
 
 #signup {
@@ -20,7 +22,6 @@
     border-radius: 5px;
     border-radius: 5px;
     display: grid;
-    height: 50%;
     position: relative;
     margin: auto;
 }
@@ -117,8 +118,8 @@ input:-moz-placeholder {
     width: 100%;
     margin-top: 20px;
     padding: 15px 0;
-    color: #fff;
-    font-size: 14px;
+    color: rgb(72, 69, 69);
+    font-size: 0.9rem;
     font-weight: 500;
     letter-spacing: 1px;
     text-align: center;
@@ -127,26 +128,11 @@ input:-moz-placeholder {
         to bottom,
         #b9c5dd 0%,
         #a4b0cb);
-    background-image: gradient(
-        linear, left top, left bottom, 
-        from(#b9c5dd),
-        to(#a4b0cb));
-    border-radius: 5px;
-    border-radius: 5px;
     border-radius: 5px;
     border: 1px solid #737b8d;
     box-shadow:
         0px 5px 5px rgba(000,000,000,0.1),
         inset 0px 1px 0px rgba(255,255,255,0.5);
-    box-shadow:
-        0px 5px 5px rgba(000,000,000,0.1),
-        inset 0px 1px 0px rgba(255,255,255,0.5);
-    box-shadow:
-        0px 5px 5px rgba(000,000,000,0.1),
-        inset 0px 1px 0px rgba(255,255,255,0.5);
-    text-shadow:
-        0px 1px 3px rgba(000,000,000,0.3),
-        0px 0px 0px rgba(255,255,255,0);
     display: table;
     position: static;
     clear: both;
